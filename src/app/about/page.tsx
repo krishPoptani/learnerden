@@ -1,8 +1,10 @@
-export default function AboutPage() {
+import AboutPage from '@/routes/about/page'
+import React from 'react'
+
+const About = () => {
   return (
-    <div>
-      <h1>About Us</h1>
-      <p>This is the About page.</p>
-    </div>
-  );
+    <div><AboutPage /></div>
+  )
 }
+
+export default About
