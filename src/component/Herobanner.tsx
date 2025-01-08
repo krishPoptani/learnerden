@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import React from 'react';
 import Card from './Card';
+import CustomButton from './Button';
 
 const Herobanner = () => {
   const teacherImg = '/images/teacherImg.png';
@@ -25,16 +26,16 @@ const Herobanner = () => {
           <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 lg:leading-tight lg:tracking-tight">
             Join the Excellence Journey with Us
           </h1>
-          <p className="text-lg md:text-xl mb-6 md:leading-normal lg:leading-relaxed" style={{color :"#5F5B53"}}>
+          <p className="text-lg  mb-6 md:leading-normal" style={{color :"#5F5B53"}}>
             Edmate is an online platform offering tools and courses for all ages, covering subjects like languages, mathematics, and more.
           </p>
           {/* Buttons for */}
           <div className='lg:flex lg:gap-4'>
-          <Button>Are you a Tutor?</Button>
-          <Button>Looking for a Tutor?</Button>
+          <CustomButton label='Are you a Tutor?' bgColor='#4A3AFF' color='#fff'></CustomButton>
+          <CustomButton label='Looking for a Tutor?' bgColor='#2A497C' color='#fff'></CustomButton>
           </div>
           {/* Recent Engagement Text */}
-          <div className='mt-5'>
+          <div className='mt-7'>
             <h3 className='' style={{color : "#5F5B53"}}>Recent Engagement</h3>
             {/* Engagement Info */}
             <div className='lg:mt-2 flex items-center gap-10'>
