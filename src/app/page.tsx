@@ -1,5 +1,6 @@
+import Navbar from "@/component/Navbar";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
-  return <Button>Click Me</Button>;
+  return <><Navbar /><Button>Click Me</Button></>;
 }
