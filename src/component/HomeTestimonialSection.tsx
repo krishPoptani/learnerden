@@ -38,7 +38,7 @@ const testimonials = [
 
 const HomeTestimonialSection = () => {
   return (
-    <div className='max-w-7xl mx-auto'>
+    <div className='max-w-7xl px-4 mx-auto'>
       {/* Testimonial Header */}
       <div className="">
         <h3 className='mt-6 text-secondary font-[500]'>- TESTIMONIALS</h3>
@@ -47,11 +47,16 @@ const HomeTestimonialSection = () => {
       <Carousel>
         <CarouselContent className='py-8 my-8'>
         {testimonials.map((testimonial, index) => (
-          <CarouselItem key={index} className="basis-1/3"><HomeTestimonialCard  {...testimonial} /></CarouselItem>
+          <CarouselItem 
+          key={index} 
+          className="basis-full sm:basis-1/2 md:basis-1/3"
+        >
+          <HomeTestimonialCard {...testimonial} />
+        </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className='hidden lg:block'/>
+      <CarouselNext className='hidden lg:block' />
     </Carousel>
     </div>
   )

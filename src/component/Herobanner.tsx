@@ -30,17 +30,17 @@ const Herobanner = () => {
             Edmate is an online platform offering tools and courses for all ages, covering subjects like languages, mathematics, and more.
           </p>
           {/* Buttons for */}
-          <div className='lg:flex lg:gap-4'>
+          <div className='flex flex-col gap-4 lg:flex-row lg:gap-4'>
           <CustomButton label='Are you a Tutor?' bgColor='#4A3AFF' color='#fff'></CustomButton>
           <CustomButton label='Looking for a Tutor?' bgColor='#2A497C' color='#fff'></CustomButton>
           </div>
           {/* Recent Engagement Text */}
           <div className='mt-7'>
-            <h3 className='' style={{color : "#5F5B53"}}>Recent Engagement</h3>
+            <h3 className='text-[#5F5B53]'>Recent Engagement</h3>
             {/* Engagement Info */}
-            <div className='lg:mt-2 flex items-center gap-10'>
-              <div ><span className='lg:text-3xl font-semibold lg:mr-2'>50K</span><span style={{color : "#5F5B53"}}>Students</span></div>
-              <div><span className='lg:text-3xl font-semibold lg:mr-2'>20+</span><span style={{color : "#5F5B53"}}>Subjects</span></div>
+            <div className='mt-2 justify-center lg:mt-2 lg:justify-start flex items-center gap-10'>
+              <div ><span className='text-xl lg:text-3xl font-semibold lg:mr-2'>50K</span><span style={{color : "#5F5B53"}}>Students</span></div>
+              <div><span className='text-xl lg:text-3xl font-semibold lg:mr-2'>20+</span><span style={{color : "#5F5B53"}}>Subjects</span></div>
             </div>
           </div>
         </div>

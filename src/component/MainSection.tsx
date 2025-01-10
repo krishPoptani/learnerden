@@ -12,8 +12,8 @@ const MainSection = () => {
         {/* Left Container */}
         <div className='max-w-lg mx-auto'>
           <h3 className='text-primary text-xl my-2 lg:my-4'>About Edmate</h3>
-          <h2 className='font-sen text-3xl font-semibold lg:my-5 max-w-sm'>Inspiring Growth Through Knowledge and Connection.</h2>
-          <p className='text-gray lg:mb-5'>The rise of online learning has reshaped education, creating a generation of learners who embrace global knowledge without boundaries. Edmate connects tutors and students seamlessly, transcending time and location. Whether learning new skills or finding students, Edmate is the ultimate teaching and learning hub, offering innovative features that make the experience engaging, effective, and accessible for all.</p>
+          <h2 className='font-sen text-3xl font-semibold my-2 lg:my-5 max-w-sm'>Inspiring Growth Through Knowledge and Connection.</h2>
+          <p className='text-gray mb-5'>The rise of online learning has reshaped education, creating a generation of learners who embrace global knowledge without boundaries. Edmate connects tutors and students seamlessly, transcending time and location. Whether learning new skills or finding students, Edmate is the ultimate teaching and learning hub, offering innovative features that make the experience engaging, effective, and accessible for all.</p>
           <CustomButton label="Learn More" bgColor='secondary' color='#fff' />  
         </div>
         {/* Right Container */}
