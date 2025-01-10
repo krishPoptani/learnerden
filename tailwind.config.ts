@@ -25,7 +25,8 @@ export default {
       },
       fontFamily: {
         poppins: ["Poppins", ...defaultTheme.fontFamily.sans], // Default font
-        sen: ["Sen", "sans-serif"], // Secondary font
+        sen: ["Sen"], // Secondary font
+        lato: ["lato"],
       },
     },
   },

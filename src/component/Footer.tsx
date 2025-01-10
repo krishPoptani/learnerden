@@ -10,10 +10,10 @@ const Footer = () => {
     // Footer Container for background Color
     <div className='bg-[#0A142F]'>
       {/* Footer Content Container */}
-        <div className='max-w-6xl mx-auto '>
+        <div className='max-w-6xl mx-auto text-sm'>
           <div className='text-white py-12 lg:py-20 lg:pb:8 grid grid-cols-1 md:grid-cols-3 gap-8'>
           <div className="">
-            <h3 className="">Quick Links</h3>
+            <h3 className="font-semibold">Quick Links</h3>
           <div className="flex flex-col gap-2 mt-5">
             <Link href="/about" className="hover:text-gray-300">
               About
@@ -24,16 +24,16 @@ const Footer = () => {
           </div>
           </div>
           <div className="">
-            <h3 className=''>Contact</h3>
-            <p className="mt-5">Balakant Samat</p> 
-            <p>Gang Bekul Canggu – Kuta,</p>
-            <p>Indonesia</p>
+            <h3 className='font-semibold'>Contact</h3>
+            <p className="font-lato mt-5">Balakant Samat</p> 
+            <p className="font-lato">Gang Bekul Canggu – Kuta,</p>
+            <p className="font-lato">Indonesia</p>
             <div>
 
             </div>
           </div>
           <div className="mt-10">
-            <div className='flex flex-col gap-5'>
+            <div className='font-lato flex flex-col gap-5'>
               <div className='flex'>
                 <img src={mobileIcon} alt="Mobile Icon" />
                 <span className='ml-5'>Berryl:  +12 (3)456 7890 1234</span>
@@ -48,7 +48,7 @@ const Footer = () => {
             <div className="border-t border-white pb-8 lg:pb-8 max-w-5xl"></div>
             {/* Content below the line */}
             <div className='text-white py-4 lg:py-4 lg:pb-20 grid grid-cols-1 md:grid-cols-3 gap-8 lg:items-center'>
-              <div>
+              <div className='text-2xl'>
                 Edmate
               </div>
               <div>

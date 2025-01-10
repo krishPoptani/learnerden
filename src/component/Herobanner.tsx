@@ -23,7 +23,7 @@ const Herobanner = () => {
 
         {/* Right Column - Content */}
         <div className="text-center md:text-left">
-          <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold mb-4 lg:leading-tight lg:tracking-tight">
+          <h1 className="font-sen text-3xl md:text-4xl lg:text-7xl font-bold mb-4 lg:leading-tight lg:tracking-tight max-w-lg">
             Join the Excellence Journey with Us
           </h1>
           <p className="text-lg  mb-6 md:leading-normal" style={{color :"#5F5B53"}}>
