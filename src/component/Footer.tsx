@@ -10,11 +10,11 @@ const Footer = () => {
     // Footer Container for background Color
     <div className='bg-[#0A142F]'>
       {/* Footer Content Container */}
-        <div className='max-w-6xl mx-auto text-sm'>
+        <div className='max-w-6xl mx-auto text-sm px-4'>
           <div className='text-white py-12 lg:py-20 lg:pb:8 grid grid-cols-1 md:grid-cols-3 gap-8'>
           <div className="">
-            <h3 className="font-semibold">Quick Links</h3>
-          <div className="flex flex-col gap-2 mt-5">
+            <h3 className="font-sen font-semibold">Quick Links</h3>
+          <div className="flex flex-col gap-2 mt-3 lg:mt-5">
             <Link href="/about" className="hover:text-gray-300">
               About
             </Link>
@@ -24,15 +24,15 @@ const Footer = () => {
           </div>
           </div>
           <div className="">
-            <h3 className='font-semibold'>Contact</h3>
-            <p className="font-lato mt-5">Balakant Samat</p> 
+            <h3 className='font-sen font-semibold'>Contact</h3>
+            <p className="font-lato mt-3 lg:mt-5">Balakant Samat</p> 
             <p className="font-lato">Gang Bekul Canggu – Kuta,</p>
             <p className="font-lato">Indonesia</p>
             <div>
 
             </div>
           </div>
-          <div className="mt-10">
+          <div className="lg:mt-10">
             <div className='font-lato flex flex-col gap-5'>
               <div className='flex'>
                 <img src={mobileIcon} alt="Mobile Icon" />

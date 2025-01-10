@@ -55,8 +55,8 @@ const HomeTestimonialSection = () => {
         </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className='hidden lg:block'/>
-      <CarouselNext className='hidden lg:block' />
+      {/* <CarouselPrevious className='hidden lg:inline-block'/>
+      <CarouselNext className='hidden lg:inline-block' /> */}
     </Carousel>
     </div>
   )
