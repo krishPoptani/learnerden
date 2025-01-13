@@ -2,6 +2,7 @@ import AboutCard from "./AboutCard";
 import AboutHeroSection from "./AboutHeroSection";
 import AboutMainSection from "./AboutMainSection";
 import AboutWhyChoose from "./AboutWhyChoose";
+import Location from "./Location";
 
 const acheivementIcon = "/icons/acheivementIcon.svg";
 const bookIcon3 = "icons/bookIcon3.svg";
@@ -42,6 +43,7 @@ export default function AboutPage() {
         </div>
       </div>
       <AboutWhyChoose />
+      <Location />
     </div>
   );
 }
