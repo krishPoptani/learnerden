@@ -1,4 +1,4 @@
-import AboutPage from '@/routes/about/page'
+import AboutPage from '@/component/AboutPage'
 import React from 'react'
 
 const About = () => {
