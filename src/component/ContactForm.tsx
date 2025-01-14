@@ -85,7 +85,7 @@ const ContactForm = () => {
                 name="syllabus"
                 value="GeneralInquiry"
                 label="GeneralInquiry"
-                checked={contactInfo.syllabus === 'GeneralInquiry'}
+                checked={contactInfo.syllabus === 'General Inquiry'}
                 onChange={handleContactInfoChange}
               />
             </div>
