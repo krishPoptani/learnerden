@@ -49,10 +49,10 @@ const Footer = () => {
             {/* Content below the line */}
             <div className='text-white py-4 lg:py-4 lg:pb-20 grid grid-cols-1 md:grid-cols-3 gap-8 lg:items-center'>
               <div className='text-2xl'>
-                Edmate
+                Global Learner Den
               </div>
               <div>
-                © 2025 Edmate. All Rights Reserved. 
+                © 2025 Global Learner Den. All Rights Reserved. 
               </div>
               <div className='flex gap-3'>
                 <img className='hover:cursor-pointer' src={facebookIcon} alt="Facebook Icon" />

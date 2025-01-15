@@ -27,7 +27,7 @@ const Herobanner = () => {
             Join the Excellence Journey with Us
           </h1>
           <p className="text-lg  mb-6 md:leading-normal" style={{color :"#5F5B53"}}>
-            Edmate is an online platform offering tools and courses for all ages, covering subjects like languages, mathematics, and more.
+            Global Learner Den is an online platform offering tools and courses for all ages, covering subjects like languages, mathematics, and more.
           </p>
           {/* Buttons for */}
           <div className='flex flex-col gap-4 lg:flex-row lg:gap-4'>

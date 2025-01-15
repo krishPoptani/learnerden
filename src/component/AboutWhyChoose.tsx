@@ -9,17 +9,17 @@ const aboutPageData = [
   {
     icon: experienceIcon,
     title: "Experience",
-    description: "While books and friends can be helpful, they don't always offer the depth and clarity that experienced tutors can. With Edmate’s expert tutors, you gain in-depth knowledge and a strong understanding. Our skilled teachers provide invaluable support, ensuring a richer learning experience for students."
+    description: "While books and friends can be helpful, they don't always offer the depth and clarity that experienced tutors can. With Global Learner Den’s expert tutors, you gain in-depth knowledge and a strong understanding. Our skilled teachers provide invaluable support, ensuring a richer learning experience for students."
   },
   {
     icon: educationIcon,
     title: "Education",
-    description: "Many students face challenges while studying. Our tutors at Edmate bring effective teaching styles, deep knowledge, engaging methods, and patience. Moreover, experienced tutors foster strong relationships with their students, ensuring a positive and productive learning experience."
+    description: "Many students face challenges while studying. Our tutors at Global Learner Den bring effective teaching styles, deep knowledge, engaging methods, and patience. Moreover, experienced tutors foster strong relationships with their students, ensuring a positive and productive learning experience."
   },
     {
     icon: certificateIcon,
     title: "Certificate",
-    description: "We’ve created a more comprehensive learning experience for both students and tutors. Along with gaining knowledge, you’ll receive certificates for completed courses or teaching sessions with Edmate, helping to boost your growth and enhance your career prospects."
+    description: "We’ve created a more comprehensive learning experience for both students and tutors. Along with gaining knowledge, you’ll receive certificates for completed courses or teaching sessions with Global Learner Den, helping to boost your growth and enhance your career prospects."
   },
 ];
 
@@ -28,7 +28,7 @@ const AboutWhyChoose = () => {
   return (
     <div className='bg-[#2447F9]'>
       <div className='mx-auto max-w-7xl px-4 pt-4 lg:pt-8'>
-        <h4 className='font-sen pt-4 lg:pt-8 text-center text-white text-2xl lg:text-4xl font-medium '>Why Choose Edmate for Learning?</h4>
+        <h4 className='font-sen pt-4 lg:pt-8 text-center text-white text-2xl lg:text-4xl font-medium '>Why Choose Global Learner Den for Learning?</h4>
       </div>
       <div className="mx-auto max-w-7xl pt-6 lg:pt-10 px-4 pb-16 lg:pb-20 flex flex-col lg:flex-row items-stretch gap-4">
       {aboutPageData?.map((card, ind) => (

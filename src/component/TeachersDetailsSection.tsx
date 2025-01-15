@@ -77,7 +77,7 @@ const TeachersDetailsSection = () => {
       <div className='mx-auto max-w-7xl py-8 px-4'>
         {/* Sections Details Page */}
         <div className='text-[#1E242C] text-center max-w-md mx-auto text-5xl leading-tight font-sen font-semibold'>Discover the Emerging Masters</div>
-        <p className='text-[#414D60] mt-2 text-center max-w-lg mx-auto'>Whether you're a tutor seeking students or a learner searching for the perfect tutor, Edmate is your ultimate destination.</p>
+        <p className='text-[#414D60] mt-2 text-center max-w-lg mx-auto'>Whether you're a tutor seeking students or a learner searching for the perfect tutor, Global Learner Den is your ultimate destination.</p>
       </div>
       <div className="mx-auto max-w-7xl pt-5 pb-20 justify-center lg:justify-start flex flex-wrap gap-6 px-4">
       {teachers.map((teacher, index) => (

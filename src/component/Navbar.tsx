@@ -13,13 +13,13 @@ export default function Navbar() {
       {/* Logo */}
       <div className="flex-shrink-0">
         <Link href="/" className="text-xl font-bold" style={{ color: '#2A497C' }}>
-          Edmate
+          Global Learner Den
         </Link>
       </div>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-8 items-center text-[#5F5B53]">
-        <Link href="/home" className="text-gray-600 hover:text-gray-800 font-medium">
+        <Link href="/" className="text-gray-600 hover:text-gray-800 font-medium">
           Home
         </Link>
         <Link href="/about" className="text-gray-600 hover:text-gray-800 font-medium">
@@ -65,7 +65,7 @@ export default function Navbar() {
       <div className="absolute top-full left-0 w-full bg-white shadow-md z-50 md:hidden">
         <div className="space-y-2 py-2">
           <Link
-            href="/home"
+            href="/"
             className="block text-gray-600 hover:text-gray-800 px-3 py-2 font-medium"
           >
             Home
