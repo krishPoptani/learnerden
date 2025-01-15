@@ -28,9 +28,9 @@ const AboutWhyChoose = () => {
   return (
     <div className='bg-[#2447F9]'>
       <div className='mx-auto max-w-7xl px-4 pt-4 lg:pt-8'>
-        <h4 className='font-sen pt-4 lg:pt-8 text-center text-white lg:text-4xl font-medium '>Why Choose Edmate for Learning?</h4>
+        <h4 className='font-sen pt-4 lg:pt-8 text-center text-white text-2xl lg:text-4xl font-medium '>Why Choose Edmate for Learning?</h4>
       </div>
-      <div className="mx-auto max-w-7xl pt-6 lg:pt-10 px-4 pb-16 lg:pb-20 flex items-stretch gap-4">
+      <div className="mx-auto max-w-7xl pt-6 lg:pt-10 px-4 pb-16 lg:pb-20 flex flex-col lg:flex-row items-stretch gap-4">
       {aboutPageData?.map((card, ind) => (
             <AboutCard2
               key={ind}
