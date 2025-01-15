@@ -52,7 +52,7 @@ const Footer = () => {
                 Edmate
               </div>
               <div>
-                © 2024 Edmate. All Rights Reserved. 
+                © 2025 Edmate. All Rights Reserved. 
               </div>
               <div className='flex gap-3'>
                 <img className='hover:cursor-pointer' src={facebookIcon} alt="Facebook Icon" />

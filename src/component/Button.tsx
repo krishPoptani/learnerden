@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 interface CustomButtonProps {
   label: string;
   bgColor?: keyof typeof colorPalette | string; 
   color?: keyof typeof colorPalette | string; 
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void; // Correct type
 }
 
 const colorPalette = {
@@ -32,7 +32,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
         color: colorPalette[color as keyof typeof colorPalette] || color,
       }}
       disabled={disabled}
-      onClick={onClick}
+      onClick={onClick} // Corrected handler
     >
       {label}
     </button>
@@ -40,3 +40,4 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 };
 
 export default CustomButton;
+

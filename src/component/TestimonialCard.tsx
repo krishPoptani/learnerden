@@ -7,28 +7,31 @@ type TestimonialCardProps = {
   rating?: number;
 };
 
+const purpleStarIcon = "/icons/purpleStarIcon.svg"
+
 const TestimonialCard: FC<TestimonialCardProps> = ({ name, position, testimony, rating }) => {
 
   const renderStars = (rating: number) => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
-      if (i < rating) {
-        stars.push('★');  // Full star
-      } else {
-        stars.push('☆');  // Empty star
-      }
+      stars.push(
+        <img
+          key={i}
+          src={purpleStarIcon}
+          alt="Star"
+          className={`w-4 h-4 ${i < rating ? '' : 'opacity-30'}`} // Dim stars if not rated
+        />
+      );
     }
-    return stars.join('');
+    return stars;
   };
   
   return (
     <div className="flex flex-col items-start p-6 border border-[#D9D9D9] rounded-lg bg-white w-full sm:w-80 lg:size-5/12">
       {rating !== undefined && (
-        <p className="text-sm text-yellow-500 font-medium">
-          {renderStars(rating).split('').map((star, index) => (
-            <span key={index} className="mr-1">{star}</span>
-          ))}
-        </p>
+        <div className="flex items-center space-x-1">
+          {renderStars(rating)}
+        </div>
       )}
       <h3 className="font-sen text-xl font-semibold lg:mt-2">{name || 'Anonymous'}</h3>
       <p className="text-sm  text-[#8B8B8B]">{position || 'Position not provided'}</p>

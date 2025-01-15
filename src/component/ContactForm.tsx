@@ -16,6 +16,15 @@ const ContactForm = () => {
     syllabus: '', // Add syllabus for radio button
   });
 
+  const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) =>{
+    e.preventDefault();
+    try {
+      console.log("Button is Clicked", contactInfo)
+    } catch (error : any) {
+      console.error(error.message);
+    }
+  }
+
   const handleContactInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setContactInfo((prev) => ({ ...prev, [name]: value }));
@@ -65,7 +74,7 @@ const ContactForm = () => {
 
           {/* Radio Buttons for syllabus */}
           <div>
-            <p className="text-gray-700 font-medium mb-2">Select Syllabus?</p>
+            <p className="text-[#011C2A] font-semibold  mb-2">Select Syllabus?</p>
             <div className="flex space-x-6 mb-8">
               <RadioButton
                 name="syllabus"
@@ -77,15 +86,15 @@ const ContactForm = () => {
               <RadioButton
                 name="syllabus"
                 value="IBBoard"
-                label="IBBoard"
+                label="IB Board"
                 checked={contactInfo.syllabus === 'IBBoard'}
                 onChange={handleContactInfoChange}
               />
               <RadioButton
                 name="syllabus"
                 value="GeneralInquiry"
-                label="GeneralInquiry"
-                checked={contactInfo.syllabus === 'General Inquiry'}
+                label="General Inquiry"
+                checked={contactInfo.syllabus === 'GeneralInquiry'}
                 onChange={handleContactInfoChange}
               />
             </div>
@@ -94,7 +103,7 @@ const ContactForm = () => {
           <Input
             label="Class"
             name="class"
-            placeholder="Enter Class"
+            placeholder="Enter your class"
             value={contactInfo.class}
             onChange={handleContactInfoChange}
             required
@@ -104,12 +113,12 @@ const ContactForm = () => {
           <Input
             label="Message"
             name="message"
-            placeholder="Enter Message"
+            placeholder="Enter your message..."
             value={contactInfo.message}
             onChange={handleContactInfoChange}
           />
           </div>
-          <CustomButton label='Send Message' color="#fff"/>
+          <CustomButton label='Send Message' color="#fff" onClick={(e : React.MouseEvent<HTMLButtonElement> ) =>{handleSubmit(e)}}/>
         </form>
       </div>
     </div>

@@ -19,7 +19,7 @@ const RadioButton: FC<RadioButtonProps> = ({ name, value, checked, label, onChan
         onChange={onChange}
         className="w-5 h-5 text-blue-600 focus:ring-blue-500"
       />
-      <label htmlFor={value} className="text-gray-700 font-medium">
+      <label htmlFor={value} className="text-gray-700 font-medium text-sm">
         {label}
       </label>
     </div>
