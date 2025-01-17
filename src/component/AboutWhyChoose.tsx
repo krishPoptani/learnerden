@@ -5,23 +5,31 @@ const experienceIcon = "/icons/experienceIcon.svg";
 const educationIcon = "/icons/educationIcon.svg";
 const certificateIcon = "/icons/certificateIcon.svg";
 
+
+
 const aboutPageData = [
   {
-    icon: experienceIcon,
-    title: "Experience",
-    description: "While books and friends can be helpful, they don't always offer the depth and clarity that experienced tutors can. With Global Learner Den’s expert tutors, you gain in-depth knowledge and a strong understanding. Our skilled teachers provide invaluable support, ensuring a richer learning experience for students."
+    icon: experienceIcon, // Replace with the appropriate success icon variable
+    title: "Proven Success",
+    description: "Our students consistently achieve exceptional results, with a 95% success rate in meeting their academic goals.",
   },
   {
-    icon: educationIcon,
-    title: "Education",
-    description: "Many students face challenges while studying. Our tutors at Global Learner Den bring effective teaching styles, deep knowledge, engaging methods, and patience. Moreover, experienced tutors foster strong relationships with their students, ensuring a positive and productive learning experience."
+    icon: educationIcon, // Replace with the appropriate tailored learning icon variable
+    title: "Tailored Learning",
+    description: "Each lesson is customized to the individual, ensuring that every student feels seen, heard, and supported.",
   },
-    {
-    icon: certificateIcon,
-    title: "Certificate",
-    description: "We’ve created a more comprehensive learning experience for both students and tutors. Along with gaining knowledge, you’ll receive certificates for completed courses or teaching sessions with Global Learner Den, helping to boost your growth and enhance your career prospects."
+  {
+    icon: educationIcon, // Replace with the appropriate holistic development icon variable
+    title: "Holistic Development",
+    description: "Beyond grades, we focus on fostering essential skills such as creativity, problem-solving, and self-confidence.",
+  },
+  {
+    icon: certificateIcon, // Replace with the appropriate caring environment icon variable
+    title: "Caring Environment",
+    description: "At Global Learner Den, students are not just learners—they are part of a family that celebrates their growth and achievements.",
   },
 ];
+
 
 
 const AboutWhyChoose = () => {

@@ -27,11 +27,11 @@ const Herobanner = () => {
             Join the Excellence Journey with Us
           </h1>
           <p className="text-lg  mb-6 md:leading-normal" style={{color :"#5F5B53"}}>
-            Global Learner Den is an online platform offering tools and courses for all ages, covering subjects like languages, mathematics, and more.
+            Whether you’re looking for online or offline coaching, we are here to help your child navigate their academic journey with care, expertise, and unwavering dedication.
           </p>
           {/* Buttons for */}
           <div className='flex flex-col gap-4 lg:flex-row lg:gap-4'>
-          <CustomButton label='Are you a Tutor?' bgColor='#4A3AFF' color='#fff'></CustomButton>
+          {/* <CustomButton label='Are you a Tutor?' bgColor='#4A3AFF' color='#fff'></CustomButton> */}
           <CustomButton label='Looking for a Tutor?' bgColor='#2A497C' color='#fff'></CustomButton>
           </div>
           {/* Recent Engagement Text */}

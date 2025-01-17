@@ -25,9 +25,9 @@ const Footer = () => {
           </div>
           <div className="">
             <h3 className='font-sen font-semibold'>Contact</h3>
-            <p className="font-lato mt-3 lg:mt-5">Balakant Samat</p> 
-            <p className="font-lato">Gang Bekul Canggu – Kuta,</p>
-            <p className="font-lato">Indonesia</p>
+            <p className="font-lato mt-3 lg:mt-5"> 105 SFS Flats Ashok Vihar Phase-3</p> 
+            <p className="font-lato">New Delhi - 110054</p>
+            <p className="font-lato">India</p>
             <div>
 
             </div>
@@ -36,11 +36,11 @@ const Footer = () => {
             <div className='font-lato flex flex-col gap-5'>
               <div className='flex'>
                 <img src={mobileIcon} alt="Mobile Icon" />
-                <span className='ml-5'>Berryl:  +12 (3)456 7890 1234</span>
+                <span className='ml-5'>Office : 9999212132</span>
               </div>
               <div className='flex'>
                 <img src={mobileIcon} alt="Mobile Icon" />
-                <span className='ml-5'>Office:  +12 (3)456 7890 1234</span>
+                <span className='ml-5'>Office:  9871488008</span>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@ const Footer = () => {
                 Global Learner Den
               </div>
               <div>
-                © 2025 Global Learner Den. All Rights Reserved. 
+                © 2025 Developed by HealthIQ+. 
               </div>
               <div className='flex gap-3'>
                 <img className='hover:cursor-pointer' src={facebookIcon} alt="Facebook Icon" />

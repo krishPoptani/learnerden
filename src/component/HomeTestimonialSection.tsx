@@ -12,27 +12,27 @@ const avatar4 = "/images/Avatar_4.png"
 const testimonials = [
   {
     avatar: avatar4,
-    name: 'John Doe',
-    bio: 'Web Developer at Tech Company',
-    testimony : "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure sint amet occaecat cupidatat non proident"
+    name: 'Vidhushi',
+    bio: 'Student',
+    testimony : "Studying with Mrs. Sonia has been a game-changer for me. Their ability to simplify complex concepts and explain them in a way that sticks is incredible. My grades have improved significantly, and I feel much more confident in my abilities!"
   },
   {
     avatar: avatar4,
-    name: 'Jane Smith',
-    bio: 'Graphic Designer and Illustrator',
-    testimony :"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure sint amet occaecat cupidatat non proident"
+    name: 'Mukesh Roy',
+    bio: 'Parents',
+    testimony :"What sets Mr. Mukesh Sethi apart is the personalized attention they give to each student. They took the time to understand my strengths and weaknesses and tailored their teaching methods accordingly. I am so grateful for their support and guidance!"
   },
     {
     avatar: avatar4,
-    name: 'Jane Smith',
-    bio: 'Graphic Designer and Illustrator',
-    testimony : "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure sint amet occaecat cupidatat non proident"
+    name: 'Aryan Nalwa',
+    bio: 'Student',
+    testimony : "Before joining Saransh’s classes, I struggled with Maths. Thanks to their patient teaching and encouragement, I not only improved my grades but also started enjoying the subject. Highly recommend them!"
   },
       {
     avatar: avatar4,
-    name: 'Jane Smith',
-    bio: 'Graphic Designer and Illustrator',
-    testimony : "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat aute irure sint amet occaecat cupidatat non proident"
+    name: 'Uttkarsh Mittal',
+    bio: 'Parents',
+    testimony : `"Sonia” is not just a tutor but a mentor. They teach life skills along with academic knowledge, which has made a huge difference in my child's attitude toward learning and problem-solving.`
   },
 ];
 

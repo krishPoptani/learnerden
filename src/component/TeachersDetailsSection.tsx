@@ -7,31 +7,35 @@ const avatar = "/images/Avatar.png"
 const avatar1 = "/images/Avatar_1.png"
 const avatar2 = "/images/Avatar_2.png"
 const avatar3 = "/images/Avatar_3.png"
+const saransh = "/images/Saransh.png";
+const sonia = "/images/Sonia.png"
+const mukesh = "/images/Mukesh.png"
+
 
 const teachers = [
   {
-    teacherImg: avatar,
+    teacherImg: mukesh,
     rating: 4,
     numOfRatings: 120,
-    teacherName: 'John Doe',
+    teacherName: 'Mukesh Sethi',
     bio: 'Teacher - upto 10th Std',
-    subjects: ['JavaScript', 'React', 'Node.js'],
+    subjects: ['Economics', 'Business Manaagement'],
   },
   {
-    teacherImg: avatar1,
+    teacherImg: saransh,
     rating: 4,
     numOfRatings: 200,
-    teacherName: 'Jane Smith',
+    teacherName: 'Saransh',
     bio: 'Teacher - upto 10th Std',
-    subjects: ['Mathematics', 'Physics'],
+    subjects: ['Science'],
   },
     {
-    teacherImg: avatar2,
+    teacherImg: sonia,
     rating: 4,
     numOfRatings: 200,
-    teacherName: 'Jane Smith',
+    teacherName: 'Mrs. Sonia',
     bio: 'Teacher - upto 10th Std',
-    subjects: ['Mathematics', 'Physics'],
+    subjects: [' Maths (AI,AA, SL/HL)' , 'English'],
   },  {
     teacherImg: avatar2,
     rating: 4,

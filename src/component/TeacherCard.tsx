@@ -27,12 +27,12 @@ const TeacherCard: React.FC<TeacherCardProps> = ({
       />
       {/* Teacher Name */}
       {/* Teacher Rating and Number of Ratings */}
-      <div className="flex items-center justify-center mt-2">
+      {/* <div className="flex items-center justify-center mt-2">
         <span className="text-yellow-500 text-sm">
           {'⭐'}
         </span>
         <span className="text-gray-500 ml-2 text-sm text-semibold">{rating}</span> <span className="text-gray-500 ml-2 text-xs">({numOfRatings})</span>
-      </div>
+      </div> */}
       <h3 className="text-xl font-semibold text-center mt-2">{teacherName}</h3>
       {/* Teacher Bio */}
       <p className="text-gray-700 text-sm mt-1 text-[#475569]">{bio}</p>

@@ -13,7 +13,9 @@ const MainSection = () => {
         <div className='max-w-lg mx-auto'>
           <h3 className='text-primary text-xl my-2 lg:my-4'>About Global Learner Den</h3>
           <h2 className='font-sen text-3xl font-semibold my-2 lg:my-5 max-w-sm'>Inspiring Growth Through Knowledge and Connection.</h2>
-          <p className='text-gray mb-5'>The rise of online learning has reshaped education, creating a generation of learners who embrace global knowledge without boundaries. Global Learner Den connects tutors and students seamlessly, transcending time and location. Whether learning new skills or finding students, Global Learner Den is the ultimate teaching and learning hub, offering innovative features that make the experience engaging, effective, and accessible for all.</p>
+          <p className='text-gray mb-5'>Welcome to Global Learner Den, where we believe every student has the potential to shine. More than just a coaching centre, we are a community dedicated to nurturing confidence, resilience, and a lifelong love for learning.
+Specializing in IB (MYP/ DP) and Cambridge (IGCSE) curricula, we offer a personalized approach that helps students not only excel academically but also develop the critical thinking and global perspective needed to succeed in today’s dynamic world.
+</p>
           <CustomButton label="Learn More" bgColor='secondary' color='#fff' />  
         </div>
         {/* Right Container */}
