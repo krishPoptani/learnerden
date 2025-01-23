@@ -36,42 +36,7 @@ const teachers = [
     teacherName: 'Mrs. Sonia',
     bio: 'Teacher - upto 10th Std',
     subjects: [' Maths (AI,AA, SL/HL)' , 'English'],
-  },  {
-    teacherImg: avatar2,
-    rating: 4,
-    numOfRatings: 200,
-    teacherName: 'Timothy Baker',
-    bio: 'Teacher - upto 10th Std',
-    subjects: ['Mathematics', 'Physics'],
-  },  {
-    teacherImg: avatar3,
-    rating: 4,
-    numOfRatings: 200,
-    teacherName: 'Shane Pratt',
-    bio: 'Teacher - upto 10th Std',
-    subjects: ['Mathematics', 'Physics'],
-  },  {
-    teacherImg: avatar1,
-    rating: 4,
-    numOfRatings: 200,
-    teacherName: 'Jane Smith',
-    bio: 'Teacher - upto 10th Std',
-    subjects: ['Mathematics', 'Physics'],
-  },  {
-    teacherImg: avatar1,
-    rating: 4,
-    numOfRatings: 200,
-    teacherName: 'Jane Smith',
-    bio: 'Teacher - upto 10th Std',
-    subjects: ['Mathematics', 'Physics'],
-  },  {
-    teacherImg: avatar1,
-    rating: 4,
-    numOfRatings: 200,
-    teacherName: 'Jane Smith',
-    bio: 'Teacher - upto 10th Std',
-    subjects: ['Mathematics', 'Physics'],
-  }, 
+  },  
 ];
 
 

@@ -16,14 +16,40 @@ const ContactForm = () => {
     syllabus: '', // Add syllabus for radio button
   });
 
-  const handleSubmit = async (e : React.MouseEvent<HTMLButtonElement>) =>{
-    e.preventDefault();
-    try {
-      console.log("Button is Clicked", contactInfo)
-    } catch (error : any) {
-      console.error(error.message);
+const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('/api/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(contactInfo),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      alert('Email sent successfully!');
+      setContactInfo({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        message: '',
+        class: '',
+        syllabus: '',
+      });
+    } else {
+      alert(`Failed to send email: ${data.message}`);
     }
+  } catch (error: any) {
+    console.error('Error sending email:', error);
+    alert('Something went wrong. Please try again later.');
   }
+};
+
 
   const handleContactInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

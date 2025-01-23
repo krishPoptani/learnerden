@@ -18,12 +18,12 @@ const TeacherCard: React.FC<TeacherCardProps> = ({
   subjects,
 }) => {
   return (
-    <div className="bg-white rounded-xl shadow-md p-6 w-72 text-center">
+    <div className="bg-white rounded-xl shadow-md p-6 w-96 text-center">
       {/* Teacher Image */}
       <img
         src={teacherImg}
         alt={teacherName}
-        className="w-16 h-16 object-cover rounded-full mx-auto"
+        className="w-20 h-20 object-cover rounded-full mx-auto"
       />
       {/* Teacher Name */}
       {/* Teacher Rating and Number of Ratings */}
