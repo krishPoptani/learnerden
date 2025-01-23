@@ -1,11 +1,16 @@
+'use client'
 import Link from 'next/link'
 import React from 'react'
+import { useSelector } from 'react-redux';
 const mobileIcon ="/icons/mobileIcon.svg";
 const facebookIcon = "/icons/facebook.svg";
 const linkedinIcon = "/icons/linkedInIcon.svg"
 const twitterIcon = "/icons/twitterIcon.svg";
 
 const Footer = () => {
+    const contactUsData = useSelector((state: any) => state?.contact);
+    const phoneNumbers = contactUsData?.phone || [];
+    const { facebookLink, twitterLink, linkedinLink } = contactUsData || {};
   return (
     // Footer Container for background Color
     <div className='bg-[#0A142F]'>
@@ -25,23 +30,30 @@ const Footer = () => {
           </div>
           <div className="">
             <h3 className='font-sen font-semibold'>Contact</h3>
-            <p className="font-lato mt-3 lg:mt-5"> 105 SFS Flats Ashok Vihar Phase-3</p> 
+            {/* <p className="font-lato mt-3 lg:mt-5"> 105 SFS Flats Ashok Vihar Phase-3</p> 
             <p className="font-lato">New Delhi - 110054</p>
-            <p className="font-lato">India</p>
+            <p className="font-lato">India</p> */}
+            <p className='font-lato mt-3 lg:mt-5" w-44'>{contactUsData?.address}</p>
             <div>
 
             </div>
           </div>
           <div className="lg:mt-10">
             <div className='font-lato flex flex-col gap-5'>
-              <div className='flex'>
+          {phoneNumbers.map((number: string, index: number) => (
+          <div className="flex" key={index}>
+            <img src={mobileIcon} alt="Mobile Icon"/>
+            <span className="ml-5">Office: {number}</span>
+          </div>
+            ))}
+              {/* <div className='flex'>
                 <img src={mobileIcon} alt="Mobile Icon" />
                 <span className='ml-5'>Office : 9999212132</span>
               </div>
               <div className='flex'>
                 <img src={mobileIcon} alt="Mobile Icon" />
                 <span className='ml-5'>Office:  9871488008</span>
-              </div>
+              </div> */}
             </div>
           </div>
           </div>
@@ -55,9 +67,33 @@ const Footer = () => {
                 © 2025 Developed by HealthIQ+. 
               </div>
               <div className='flex gap-3'>
-                <img className='hover:cursor-pointer' src={facebookIcon} alt="Facebook Icon" />
-                <img className='hover:cursor-pointer' src={linkedinIcon} alt="Linkedin Icon" />
-                <img className='hover:cursor-pointer' src={twitterIcon} alt="Twitter Icon" />
+                 {facebookLink && (
+            <a href={facebookLink} target="_blank" rel="noopener noreferrer">
+              <img
+                className="hover:cursor-pointer"
+                src={facebookIcon}
+                alt="Facebook Icon"
+              />
+            </a>
+          )}
+          {linkedinLink && (
+            <a href={linkedinLink} target="_blank" rel="noopener noreferrer">
+              <img
+                className="hover:cursor-pointer"
+                src={linkedinIcon}
+                alt="LinkedIn Icon"
+              />
+            </a>
+          )}
+          {twitterLink && (
+            <a href={twitterLink} target="_blank" rel="noopener noreferrer">
+              <img
+                className="hover:cursor-pointer"
+                src={twitterIcon}
+                alt="Twitter Icon"
+              />
+            </a>
+          )}
               </div>
             </div>
         </div>

@@ -1,10 +1,27 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetContactUsQuery } from '../../slices/contactForm';
+import { setContact } from '../../slices/contactForm';
 import CustomButton from './Button';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  
+  // Fetch contact data if not already available in the store
+  const { data, isLoading, isError } = useGetContactUsQuery();
+
+  // Get the dispatch function and the current contact state from Redux
+  const dispatch = useDispatch();
+
+  // Update Redux store when new data is fetched
+  useEffect(() => {
+    if (data) {
+      dispatch(setContact(data)); // Store the fetched data in Redux
+    }
+  }, [data, dispatch]); 
 
   return (
 <nav className="bg-white border-b border-[#aeaeae] shadow-sm relative">
