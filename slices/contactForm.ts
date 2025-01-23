@@ -33,11 +33,11 @@ export const contactReducer = contactSlice.reducer;
 export const contactApi = createApi({
   reducerPath: "contactApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://locahost:3000/contactUs", // Replace with your actual API URL
+    baseUrl: "http://localhost:3000/api/", // Replace with your actual API URL
   }),
   endpoints: (builder) => ({
     getContactUs: builder.query<ContactUs, void>({
-      query: () => "", // This will get the contact information
+      query: () => "create-contact",
     }),
   }),
 });

@@ -1,10 +1,11 @@
 // redux/store.ts
 import { configureStore } from "@reduxjs/toolkit";
-import { contactApi } from "../slices/contactForm";
+import { contactApi, contactReducer } from "../slices/contactForm";
 
 export const store = configureStore({
   reducer: {
-    [contactApi.reducerPath]: contactApi.reducer, // Add RTK Query reducer
+    contact: contactReducer,
+    [contactApi.reducerPath]: contactApi.reducer, // Add RTK Query reducer for API
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(contactApi.middleware), // Add RTK Query middleware

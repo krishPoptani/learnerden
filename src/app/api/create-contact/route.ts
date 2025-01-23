@@ -58,28 +58,18 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
   try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id"); // Optional query parameter for specific record
+    const contact = await prisma.contactUs.findUnique({
+      where: { id: 2 },
+    });
 
-    if (id) {
-      // Fetch a single contact by ID
-      const contact = await prisma.contactUs.findUnique({
-        where: { id: parseInt(id, 10) },
-      });
-
-      if (!contact) {
-        return NextResponse.json(
-          { error: "Contact not found." },
-          { status: 404 }
-        );
-      }
-
-      return NextResponse.json(contact, { status: 200 });
+    if (!contact) {
+      return NextResponse.json(
+        { error: "Contact not found." },
+        { status: 404 }
+      );
     }
 
-    // Fetch all contacts if no ID is provided
-    const contacts = await prisma.contactUs.findMany();
-    return NextResponse.json(contacts, { status: 200 });
+    return NextResponse.json(contact, { status: 200 });
   } catch (error) {
     console.error("Error fetching contacts:", error);
     return NextResponse.json(
