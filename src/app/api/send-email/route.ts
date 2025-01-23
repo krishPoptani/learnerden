@@ -54,7 +54,3 @@ export async function POST(req: Request) {
     );
   }
 }
-
-export async function GET(req: Request, res: NextResponse) {
-  return NextResponse.json({ message: "Hello, world!" });
-}
