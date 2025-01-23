@@ -31,7 +31,6 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const data = await response.json();
 
     if (response.ok) {
-      alert('Email sent successfully!');
       setContactInfo({
         firstName: '',
         lastName: '',

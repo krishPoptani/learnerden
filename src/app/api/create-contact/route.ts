@@ -4,9 +4,7 @@ import { prisma } from "../utils/prisma";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-
     const {
-      id,
       phone,
       email,
       address,
@@ -23,9 +21,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Upsert based on `id`
+    // Always update where id = 2
     const contact = await prisma.contactUs.upsert({
-      where: { id: id || 0 },
+      where: { id: 2 },
       update: {
         phone,
         email,
@@ -36,6 +34,7 @@ export async function POST(req: Request) {
         instagramLink: instagramLink || null,
       },
       create: {
+        id: 2, // Explicitly set the ID for creation
         phone,
         email,
         address,
