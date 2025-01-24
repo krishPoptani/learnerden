@@ -140,36 +140,57 @@ export default function Navbar() {
     </div>
 
     {/* Mobile Menu Dropdown */}
-    {isOpen && (
-      <div className="absolute top-full left-0 w-full bg-white shadow-md z-50 md:hidden">
-        <div className="space-y-2 py-2">
-          <Link
-            href="/"
-            className={`${currentPath === '/' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
-          >
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className={`${currentPath === '/about' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
-          >
-            About
-          </Link>
-          <Link
-            href="/testimonial"
-            className={`${currentPath === '/testimonial' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
-          >
-            Testimonial
-          </Link>
-          <Link
-            href="/contact"
-            className={`${currentPath === '/contact' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
-          >
-            Contact
-          </Link>
-        </div>
-      </div>
-    )}
+   {isOpen && (
+  <div className="absolute top-full left-0 w-full bg-white shadow-md z-50 md:hidden">
+    <div className="space-y-2 py-2">
+      <Link
+        href="/"
+        className={`${
+          currentPath === '/'
+            ? 'text-[#2A497C] font-bold'
+            : 'text-gray-600 hover:text-gray-800'
+        } block px-3 py-2 font-medium`}
+        onClick={() => setIsOpen(false)} // Close the menu on click
+      >
+        Home
+      </Link>
+      <Link
+        href="/about"
+        className={`${
+          currentPath === '/about'
+            ? 'text-[#2A497C] font-bold'
+            : 'text-gray-600 hover:text-gray-800'
+        } block px-3 py-2 font-medium`}
+        onClick={() => setIsOpen(false)} // Close the menu on click
+      >
+        About
+      </Link>
+      <Link
+        href="/testimonial"
+        className={`${
+          currentPath === '/testimonial'
+            ? 'text-[#2A497C] font-bold'
+            : 'text-gray-600 hover:text-gray-800'
+        } block px-3 py-2 font-medium`}
+        onClick={() => setIsOpen(false)} // Close the menu on click
+      >
+        Testimonial
+      </Link>
+      <Link
+        href="/contact"
+        className={`${
+          currentPath === '/contact'
+            ? 'text-[#2A497C] font-bold'
+            : 'text-gray-600 hover:text-gray-800'
+        } block px-3 py-2 font-medium`}
+        onClick={() => setIsOpen(false)} // Close the menu on click
+      >
+        Contact
+      </Link>
+    </div>
+  </div>
+)}
+
   </div>
 </nav>
   );

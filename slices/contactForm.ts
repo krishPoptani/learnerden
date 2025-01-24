@@ -2,6 +2,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createSlice } from "@reduxjs/toolkit";
 
+interface EmailPayload {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  message: string;
+  syllabus?: string; // Optional
+  class?: string; // Optional
+}
+
 interface ContactUs {
   id: number;
   phone: string[];
@@ -49,7 +59,18 @@ export const contactApi = createApi({
         },
       }),
     }),
+    sendEmail: builder.mutation<void, EmailPayload>({
+      query: (payload) => ({
+        url: "send-email", // API endpoint for sending email
+        method: "POST",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useGetContactUsQuery, useUpdateContactUsMutation } = contactApi;
+export const {
+  useGetContactUsQuery,
+  useUpdateContactUsMutation,
+  useSendEmailMutation,
+} = contactApi;

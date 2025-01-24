@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Input from './Input';
 import RadioButton from './RadioButton';
 import CustomButton from './Button';
+import { useSendEmailMutation } from "../../slices/contactForm";
 
 const ContactForm = () => {
   const [contactInfo, setContactInfo] = useState({
@@ -16,21 +17,13 @@ const ContactForm = () => {
     syllabus: '', // Add syllabus for radio button
   });
 
+    const [sendEmail, { isLoading, isSuccess, error }] = useSendEmailMutation();
+
 const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
   e.preventDefault();
 
   try {
-    const response = await fetch('/api/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(contactInfo),
-    });
-
-    const data = await response.json();
-
-    if (response.ok) {
+    await sendEmail(contactInfo).unwrap();
       setContactInfo({
         firstName: '',
         lastName: '',
@@ -40,9 +33,6 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         class: '',
         syllabus: '',
       });
-    } else {
-      alert(`Failed to send email: ${data.message}`);
-    }
   } catch (error: any) {
     console.error('Error sending email:', error);
     alert('Something went wrong. Please try again later.');
@@ -144,7 +134,7 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
           />
           </div>
           <div className='flex justify-end'>
-          <CustomButton label='Send Message' color="#fff" bgColor='#4A3AFF' onClick={(e : React.MouseEvent<HTMLButtonElement> ) =>{handleSubmit(e)}}/>
+          <CustomButton label={!isLoading ? "Send Message" : "Sending..."} color="#fff" bgColor='#4A3AFF' onClick={(e : React.MouseEvent<HTMLButtonElement> ) =>{handleSubmit(e)}}/>
           </div>
         </form>
       </div>

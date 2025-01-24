@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button';
 import React from 'react';
 import Card from './Card';
 import CustomButton from './Button';
+import Link from 'next/link';
+
 
 const Herobanner = () => {
   const teacherImg = '/images/teacherImg.png';
@@ -32,7 +34,9 @@ const Herobanner = () => {
           {/* Buttons for */}
           <div className='flex flex-col gap-4 lg:flex-row lg:gap-4'>
           {/* <CustomButton label='Are you a Tutor?' bgColor='#4A3AFF' color='#fff'></CustomButton> */}
+          <Link href="/contact">
           <CustomButton label='Looking for a Tutor?' bgColor='#2A497C' color='#fff' rounded='rounded-full'></CustomButton>
+          </Link>
           </div>
           {/* Recent Engagement Text */}
           <div className='mt-7'>

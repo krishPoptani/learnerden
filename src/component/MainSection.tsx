@@ -1,5 +1,6 @@
 import React from 'react'
 import CustomButton from './Button'
+import Link from 'next/link'
 
 const coolKid="/images/cool-kid.png"
 const MainSection = () => {
@@ -15,7 +16,9 @@ const MainSection = () => {
           <p className='text-gray mb-5'>Welcome to Global Learner Den, where we believe every student has the potential to shine. More than just a coaching centre, we are a community dedicated to nurturing confidence, resilience, and a lifelong love for learning.
 Specializing in IB (MYP/ DP) and Cambridge (IGCSE) curricula, we offer a personalized approach that helps students not only excel academically but also develop the critical thinking and global perspective needed to succeed in today’s dynamic world.
 </p>
+          <Link href="/about">
           <CustomButton rounded="rounded-full" label="Learn More" bgColor='secondary' color='#fff' />  
+          </Link>
         </div> 
         {/* Right Container */}
         <div className='relative'>

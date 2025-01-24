@@ -60,9 +60,22 @@ const UpdateContactForm = () => {
   }
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Update Contact Information</h2>
-      <form onSubmit={handleUpdate} className="space-y-4">
+          <div className="py-8 bg-[#FAFAFA]">
+        <div className="max-w-7xl mx-auto px-4 mt-6">
+        <h2 className="mx-auto font-sen text-secondary text-center font-bold text-3xl lg:text-4xl">Update Contact Information</h2>
+        <div className='mt-10 lg:mt-20  bg-white py-2 shadow-md mx-auto max-w-5xl rounded-6xl'>
+      <form onSubmit={handleUpdate} className="max-w-4xl mx-auto px-4 pt-4 pb-4 lg:pt-8 lg:px-8 ">
+        <div className='space-y-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-10'>
+        <Input
+          type="text"
+          name="email"
+          placeholder="Enter email ID (comma-separated)"
+          value={contactInfo.email}
+          onChange={handleInputChange}
+          label="Email"
+          required
+        />
         <Input
           type="text"
           name="phone"
@@ -72,15 +85,8 @@ const UpdateContactForm = () => {
           onChange={handleInputChange}
           required
         />
-        <Input
-          type="text"
-          name="email"
-          placeholder="Enter emails (comma-separated)"
-          value={contactInfo.email}
-          onChange={handleInputChange}
-          label="Email"
-          required
-        />
+        </div>
+
         <Input
           type="text"
           name="address"
@@ -90,13 +96,19 @@ const UpdateContactForm = () => {
           label="Address"
           required
         />
+        </div>
+        <div className='relative'>
+        <h2 className='text-2xl text-[#4A3AFF] mt-10 mb-3'>Social Platforms</h2>
+          <div className="absolute top-10 lg:top-7 left-0 bg-primary h-0.5" style={{ width: '2%' }}></div>
+        </div>
+        <div className='space-y-10'>
         <Input
           type="text"
           name="facebookLink"
           placeholder="Facebook link"
           value={contactInfo.facebookLink}
           onChange={handleInputChange}
-          label="Facebook Link"
+          label="Facebook"
         />
         <Input
           type="text"
@@ -104,7 +116,7 @@ const UpdateContactForm = () => {
           placeholder="Twitter link"
           value={contactInfo.twitterLink}
           onChange={handleInputChange}
-          label="Twitter Link"
+          label="Twitter"
         />
         <Input
           type="text"
@@ -112,7 +124,7 @@ const UpdateContactForm = () => {
           placeholder="LinkedIn link"
           value={contactInfo.linkedinLink}
           onChange={handleInputChange}
-          label="LinkedIn Link"
+          label="LinkedIn"
         />
         {/* <input
           type="text"
@@ -122,16 +134,21 @@ const UpdateContactForm = () => {
           onChange={handleInputChange}
           className="w-full p-2 border rounded"
         /> */}
+        <div className='flex justify-end'>
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-[#4A3AFF] px-6 lg:px-10 py-4 font-medium transition duration-300 ease-in-out text-white rounded-3xl"
           disabled={isLoading}
         >
           {isLoading ? 'Updating...' : 'Update Contact'}
         </button>
-      </form>
+        </div>
       {isSuccess && <p className="text-green-500 mt-2">Contact updated successfully!</p>}
       {isError && <p className="text-red-500 mt-2">Failed to update contact.</p>}
+        </div>
+      </form>
+      </div>
+    </div>
     </div>
   );
 };
