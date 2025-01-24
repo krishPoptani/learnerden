@@ -100,7 +100,7 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
           {/* Radio Buttons for syllabus */}
           <div>
             <p className="text-[#011C2A] font-semibold  mb-2">Select Syllabus?</p>
-            <div className="flex space-x-6 mb-8">
+            <div className="flex space-x-2 md:space-x-12 lg:space-x-20 mb-8">
               <RadioButton
                 name="syllabus"
                 value="CBSE"
@@ -143,7 +143,9 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
             onChange={handleContactInfoChange}
           />
           </div>
-          <CustomButton label='Send Message' color="#fff" onClick={(e : React.MouseEvent<HTMLButtonElement> ) =>{handleSubmit(e)}}/>
+          <div className='flex justify-end'>
+          <CustomButton label='Send Message' color="#fff" bgColor='#4A3AFF' onClick={(e : React.MouseEvent<HTMLButtonElement> ) =>{handleSubmit(e)}}/>
+          </div>
         </form>
       </div>
     </div>

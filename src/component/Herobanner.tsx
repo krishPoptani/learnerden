@@ -32,7 +32,7 @@ const Herobanner = () => {
           {/* Buttons for */}
           <div className='flex flex-col gap-4 lg:flex-row lg:gap-4'>
           {/* <CustomButton label='Are you a Tutor?' bgColor='#4A3AFF' color='#fff'></CustomButton> */}
-          <CustomButton label='Looking for a Tutor?' bgColor='#2A497C' color='#fff'></CustomButton>
+          <CustomButton label='Looking for a Tutor?' bgColor='#2A497C' color='#fff' rounded='rounded-full'></CustomButton>
           </div>
           {/* Recent Engagement Text */}
           <div className='mt-7'>

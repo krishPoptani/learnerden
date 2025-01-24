@@ -35,7 +35,7 @@ const teachers = [
     numOfRatings: 200,
     teacherName: 'Mrs. Sonia',
     bio: 'Teacher - upto 10th Std',
-    subjects: [' Maths (AI,AA, SL/HL)' , 'English'],
+    subjects: [' Maths (AI, AA, SL/HL)' , 'English'],
   },  
 ];
 

@@ -1,15 +1,17 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetContactUsQuery } from '../../slices/contactForm';
 import { setContact } from '../../slices/contactForm';
-import CustomButton from './Button';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  
+  const currentPath = usePathname(); // Get the current route
+
+
   // Fetch contact data if not already available in the store
   const { data, isLoading, isError } = useGetContactUsQuery();
 
@@ -36,18 +38,78 @@ export default function Navbar() {
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-8 items-center text-[#5F5B53]">
-        <Link href="/" className="text-gray-600 hover:text-gray-800 font-medium">
-          Home
-        </Link>
-        <Link href="/about" className="text-gray-600 hover:text-gray-800 font-medium">
-          About
-        </Link>
-        <Link href="/testimonial" className="text-gray-600 hover:text-gray-800 font-medium">
-          Testimonial
-        </Link>
-        <Link href="/contact" className="text-gray-600 hover:text-gray-800 font-medium">
-          Contact
-        </Link>
+<Link
+  href="/"
+  className={`font-medium relative ${
+    currentPath === '/' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'
+  }`}
+>
+  <span className="relative">
+    <span
+      className={`${
+        currentPath === '/' ? 'underline decoration-2 decoration-[#2A497C]' : ''
+      }`}
+    >
+      H
+    </span>
+    ome
+  </span>
+</Link>
+
+<Link
+  href="/about"
+  className={`font-medium relative ${
+    currentPath === '/about' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'
+  }`}
+>
+  <span className="relative">
+    <span
+      className={`${
+        currentPath === '/about' ? 'underline decoration-2 decoration-[#2A497C]' : ''
+      }`}
+    >
+      A
+    </span>
+    bout
+  </span>
+</Link>
+
+<Link
+  href="/testimonial"
+  className={`font-medium relative ${
+    currentPath === '/testimonial' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'
+  }`}
+>
+  <span className="relative">
+    <span
+      className={`${
+        currentPath === '/testimonial' ? 'underline decoration-2 decoration-[#2A497C]' : ''
+      }`}
+    >
+      T
+    </span>
+    estimonial
+  </span>
+</Link>
+
+<Link
+  href="/contact"
+  className={`font-medium relative ${
+    currentPath === '/contact' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'
+  }`}
+>
+  <span className="relative">
+    <span
+      className={`${
+        currentPath === '/contact' ? 'underline decoration-2 decoration-[#2A497C]' : ''
+      }`}
+    >
+      C
+    </span>
+    ontact
+  </span>
+</Link>
+
         <div>
           <button className='px-6 py-2 font-medium rounded-3xl transition duration-300 ease-in-out bg-[#2A497C] text-[#fff]'>Book Demo</button>
         </div>
@@ -83,25 +145,25 @@ export default function Navbar() {
         <div className="space-y-2 py-2">
           <Link
             href="/"
-            className="block text-gray-600 hover:text-gray-800 px-3 py-2 font-medium"
+            className={`${currentPath === '/' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
           >
             Home
           </Link>
           <Link
             href="/about"
-            className="block text-gray-600 hover:text-gray-800 px-3 py-2 font-medium"
+            className={`${currentPath === '/about' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
           >
             About
           </Link>
           <Link
             href="/testimonial"
-            className="block text-gray-600 hover:text-gray-800 px-3 py-2 font-medium"
+            className={`${currentPath === '/testimonial' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
           >
             Testimonial
           </Link>
           <Link
             href="/contact"
-            className="block text-gray-600 hover:text-gray-800 px-3 py-2 font-medium"
+            className={`${currentPath === '/contact' ? 'text-[#2A497C] font-bold' : 'text-gray-600 hover:text-gray-800'} block px-3 py-2 font-medium`}
           >
             Contact
           </Link>
@@ -110,7 +172,5 @@ export default function Navbar() {
     )}
   </div>
 </nav>
-
   );
 }
-

@@ -17,7 +17,9 @@ const ContactLeftContainer = () => {
   const { phone, email, address, facebookLink, twitterLink, linkedinLink } = contactUsData || {};
 
   return (
-    <div className="bg-[#09132D] rounded-xl">
+    <div className="bg-[#09132D] bg-cover rounded-2xl" 
+      style={{ backgroundImage: 'url(/images/purple-bg.png)' }}
+      >
       <div className="px-4 pt-4 pb-4 lg:pb-4 lg:pt-8 lg:px-8 text-white">
         <h2 className="text-xl lg:text-2xl">Contact Information</h2>
         <p className="mt-1 lg:text-xl text-[#C9C9C9]">Say something to start a live chat!</p>
