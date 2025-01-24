@@ -5,6 +5,7 @@ import Input from './Input';
 import RadioButton from './RadioButton';
 import CustomButton from './Button';
 import { useSendEmailMutation } from "../../slices/contactForm";
+import { toast } from 'react-hot-toast';
 
 const ContactForm = () => {
   const [contactInfo, setContactInfo] = useState({
@@ -33,6 +34,7 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         class: '',
         syllabus: '',
       });
+      toast.success('Form Submitted Successfully!');
   } catch (error: any) {
     console.error('Error sending email:', error);
     alert('Something went wrong. Please try again later.');
@@ -134,7 +136,7 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
           />
           </div>
           <div className='flex justify-end'>
-          <CustomButton label={!isLoading ? "Send Message" : "Sending..."} color="#fff" bgColor='#4A3AFF' onClick={(e : React.MouseEvent<HTMLButtonElement> ) =>{handleSubmit(e)}}/>
+          <CustomButton disabled={isLoading} label={!isLoading ? "Send Message" : "Sending..."} color="#fff" bgColor='#4A3AFF' onClick={(e : React.MouseEvent<HTMLButtonElement> ) =>{handleSubmit(e)}}/>
           </div>
         </form>
       </div>

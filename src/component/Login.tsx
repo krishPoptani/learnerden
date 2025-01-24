@@ -10,10 +10,13 @@ const Login: React.FC<LoginProps> = ({ setIsLogin })=> {
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e : any) => {
+    console.log("Button CLicked")
     e.preventDefault();
-    if(email ==="globaldenlearner@gmail.com" && password==="globaldenlearner"){
+    if(email ===process.env.NEXT_PUBLIC_USERNAME && password===process.env.NEXT_PUBLIC_PASSWORD){
       setIsLogin(true);
     }
+    console.log("USername", process.env.NEXT_PUBLIC_USERNAME, "password ", process.env.NEXT_PUBLIC_PASSWORD)
+      console.log("email,", email, "Password", password);
     setEmail("");
     setPassword("");
   };

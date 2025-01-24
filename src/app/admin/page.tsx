@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useGetContactUsQuery, useUpdateContactUsMutation } from '../../../slices/contactForm'; // Adjust the path based on your project structure
 import Input from '@/component/Input';
+import { toast } from 'react-hot-toast';
+import Login from '@/component/Login';
 
 const UpdateContactForm = () => {
   const [contactInfo, setContactInfo] = useState({
@@ -50,17 +52,21 @@ const UpdateContactForm = () => {
         linkedinLink: contactInfo.linkedinLink || undefined,
         instagramLink: contactInfo.instagramLink || undefined,
       }).unwrap();
+      toast.success('Form Submitted Successfully!');
     } catch (error) {
       console.error('Error updating contact:', error);
     }
   };
+
+  const [islogin, setIsLogin] = useState(false);
 
   if (isFetching) {
     return <p>Loading contact information...</p>;
   }
 
   return (
-          <div className="py-8 bg-[#FAFAFA]">
+    <div>
+          {islogin ? (<div className="py-8 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-4 mt-6">
         <h2 className="mx-auto font-sen text-secondary text-center font-bold text-3xl lg:text-4xl">Update Contact Information</h2>
         <div className='mt-10 lg:mt-20  bg-white py-2 shadow-md mx-auto max-w-5xl rounded-6xl'>
@@ -143,12 +149,11 @@ const UpdateContactForm = () => {
           {isLoading ? 'Updating...' : 'Update Contact'}
         </button>
         </div>
-      {isSuccess && <p className="text-green-500 mt-2">Contact updated successfully!</p>}
-      {isError && <p className="text-red-500 mt-2">Failed to update contact.</p>}
         </div>
       </form>
       </div>
     </div>
+    </div>) : <Login setIsLogin={setIsLogin}/>}
     </div>
   );
 };
