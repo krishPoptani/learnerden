@@ -43,7 +43,7 @@ export const contactReducer = contactSlice.reducer;
 export const contactApi = createApi({
   reducerPath: "contactApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3000/api/",
+    baseUrl: "https://aieducationpro.com/api/",
   }),
   endpoints: (builder) => ({
     getContactUs: builder.query<ContactUs, void>({

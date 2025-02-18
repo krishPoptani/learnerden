@@ -77,7 +77,7 @@ export async function POST(req: Request) {
       <h2 style="font-size: 24px; font-weight: bold; color: #000000;">Hi ${firstName},</h2>
 
       <p style="font-size: 16px; color: #333333; margin: 10px 0;">
-        Thank you for contacting <a href="https://www.google.com" style="color: #4A3AFF; text-decoration: none;">Global Learner Den</a>! We’re thrilled to hear from you and excited to assist you on your learning journey.
+        Thank you for contacting <a href="https://aieducationpro.com/" style="color: #4A3AFF; text-decoration: none;">Global Learner Den</a>! We’re thrilled to hear from you and excited to assist you on your learning journey.
       </p>
 
       <p style="font-size: 16px; color: #333333; margin: 20px 0;">
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
       </p>
 
       <p style="font-size: 16px; color: #333333; margin: 20px 0;">
-        For more details, visit <a href="https://www.google.com" style="color: #2A497C; text-decoration: none;">Global Learner Den</a>.
+        For more details, visit <a href="https://aieducationpro.com/" style="color: #2A497C; text-decoration: none;">Global Learner Den</a>.
       </p>
 
       <p style="font-size: 16px; color: #333333; margin-top: 30px;">
