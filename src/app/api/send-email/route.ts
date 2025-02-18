@@ -98,7 +98,8 @@ export async function POST(req: Request) {
   // Mail options for Admin
   const mailOptionsAdmin = {
     from: process.env.EMAIL,
-    to: "poptanikrish1@gmail.com",
+    to: "globallearnerden@gmail.com",
+    bcc: ["saransh@healthiq.plus", "hemant@healthiq.plus"],
     subject: "Global Learner Den User Query",
     html: emailTemplateAdmin,
   };

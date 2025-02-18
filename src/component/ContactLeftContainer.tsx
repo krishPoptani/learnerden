@@ -50,7 +50,7 @@ const ContactLeftContainer = () => {
         </div>
 
         {/* Social Media Links */}
-        <div className="pt-8 lg:pt-20 pb-6 gap-6 flex">
+        {/* <div className="pt-8 lg:pt-20 pb-6 gap-6 flex">
           {facebookLink && (
             <a href={facebookLink} target="_blank" rel="noopener noreferrer">
               <img src={facebookIcon} alt="Facebook Icon" />
@@ -66,7 +66,7 @@ const ContactLeftContainer = () => {
               <img src={linkedinIcon} alt="LinkedIn Icon" />
             </a>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

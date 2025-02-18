@@ -6,6 +6,7 @@ const mobileIcon ="/icons/mobileIcon.svg";
 const facebookIcon = "/icons/facebook.svg";
 const linkedinIcon = "/icons/linkedInIcon.svg"
 const twitterIcon = "/icons/twitterIcon.svg";
+const globalLearnerDenLogo = "images/globallogo.jpg"
 
 const Footer = () => {
     const contactUsData = useSelector((state: any) => state?.contact);
@@ -61,13 +62,14 @@ const Footer = () => {
             {/* Content below the line */}
             <div className='text-white py-4 lg:py-4 lg:pb-20 grid grid-cols-1 md:grid-cols-3 gap-8 lg:items-center'>
               <div className='text-2xl'>
-                Global Learner Den
+                {/* Global Learner Den */}
+                <img className="w-32 h-32 object-cover"src={globalLearnerDenLogo} alt="global Learner Den logo" />
               </div>
               <div>
                 © 2025 Developed by HealthIQ+. 
               </div>
               <div className='flex gap-3'>
-                 {facebookLink && (
+                 {/* {facebookLink && (
             <a href={facebookLink} target="_blank" rel="noopener noreferrer">
               <img
                 className="hover:cursor-pointer"
@@ -93,7 +95,7 @@ const Footer = () => {
                 alt="Twitter Icon"
               />
             </a>
-          )}
+          )} */}
               </div>
             </div>
         </div>

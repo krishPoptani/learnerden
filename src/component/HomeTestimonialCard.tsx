@@ -1,4 +1,6 @@
+'use client'
 import React from 'react';
+import { useRouter } from "next/navigation";
 
 interface HomeTestimonialCardProps {
   testimony ?: string,
@@ -8,16 +10,17 @@ interface HomeTestimonialCardProps {
 }
 
 const HomeTestimonialCard: React.FC<HomeTestimonialCardProps> = ({ avatar, name, bio, testimony }) => {
+  const router = useRouter();
   return (
     <div className="border border-[#EFF0F6] bg-white rounded-lg shadow-lg p-10 max-w-sm overflow-visible">
       {/* Testimonial Avatar */}
-      <p className='text-[#6F6C90]'>{testimony}</p>
+      <p className='text-[#6F6C90]'>{testimony?.slice(0,170)}<span>{testimony && testimony?.length > 170 ? "..." : ""}</span><span className='text-[#4A3AFF] hover:cursor-pointer text-sm' onClick={(e)=>{e.preventDefault(); router.push("/testimonial")}}>{testimony && testimony?.length > 170 ? "Read More" : ""}</span></p>
       <div className="flex items-center space-x-4 mt-5">
-        <img
+        {/* <img
           src={avatar}
           alt={name}
           className="w-16 h-16 object-cover rounded-full"
-        />
+        /> */}
         <div>
           <h3 className="text-lg font-semibold text-[#170F49]">{name}</h3>
           <p className="text-sm text-gray-500 text-[#6F6C90]">{bio}</p>

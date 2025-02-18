@@ -51,7 +51,7 @@ export const contactApi = createApi({
     }),
     updateContactUs: builder.mutation<ContactUs, Partial<ContactUs>>({
       query: (data) => ({
-        url: "create-contact", // Adjust endpoint based on your backend setup
+        url: "create-contact", // Adjust endpoint based on your b ackend setup
         method: "POST",
         body: {
           ...data,
