@@ -18,7 +18,7 @@ const testimonialData = [
     {
     name : "Aryan Nalwa",
     position : "Student",
-    testimony : "Before joining Saransh’s classes, I struggled with Maths. Thanks to their patient teaching and encouragement, I not only improved my grades but also started enjoying the subject. Highly recommend them!",
+    testimony : "Before joining Saransh’s classes, I struggled with Science. Thanks to their patient teaching and encouragement, I not only improved my grades but also started enjoying the subject. Highly recommend them!",
     rating : 4,
   },
     {

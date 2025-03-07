@@ -18,7 +18,7 @@ const teachers = [
     rating: 4,
     numOfRatings: 120,
     teacherName: 'Mr. Mukesh Sethi',
-    bio: 'Teacher - upto 10th Std',
+    bio: 'Teacher - upto 12th Std',
     subjects: ['Economics', 'Business Manaagement'],
   },
   {
@@ -26,7 +26,7 @@ const teachers = [
     rating: 4,
     numOfRatings: 200,
     teacherName: 'Mr. Saransh Rai',
-    bio: 'Teacher - upto 10th Std',
+    bio: 'Teacher - upto 12th Std',
     subjects: ['Science'],
   },
     {
@@ -34,7 +34,7 @@ const teachers = [
     rating: 4,
     numOfRatings: 200,
     teacherName: 'Mrs. Sonia Chaddha',
-    bio: 'Teacher - upto 10th Std',
+    bio: 'Teacher - upto 12th Std',
     subjects: [' Maths (AI, AA, SL/HL)' , 'English'],
   },  
 ];
