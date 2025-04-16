@@ -1,12 +1,10 @@
 // components/Navbar.tsx
-import { useState } from "react";
 import Link from "next/link";
 import { Bell, Settings } from "lucide-react";
 import Image from "next/image";
 import Menu from "./Menu";
 
 const AdminHeader = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const saransh = "/images/Saransh.png";
 
   return (
