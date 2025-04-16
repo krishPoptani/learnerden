@@ -28,6 +28,10 @@ export default {
         sen: ["Sen"], // Secondary font
         lato: ["lato"],
       },
+      backgroundImage: {
+        "footer-gradient":
+          "linear-gradient(96deg, #3E4FBB -14.71%, #C32E6B 100%)",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

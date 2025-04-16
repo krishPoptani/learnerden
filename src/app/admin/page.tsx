@@ -5,6 +5,7 @@ import { useGetContactUsQuery, useUpdateContactUsMutation } from '../../../slice
 import Input from '@/component/Input';
 import { toast } from 'react-hot-toast';
 import Login from '@/component/Login';
+import UserDashboard from '@/routes/userside/page';
 
 const UpdateContactForm = () => {
   const [contactInfo, setContactInfo] = useState({
@@ -65,6 +66,7 @@ const UpdateContactForm = () => {
   }
 
   return (
+    <UserDashboard>
     <div>
           {islogin ? (<div className="py-8 bg-[#FAFAFA]">
         <div className="max-w-7xl mx-auto px-4 mt-6">
@@ -155,6 +157,7 @@ const UpdateContactForm = () => {
     </div>
     </div>) : <Login setIsLogin={setIsLogin}/>}
     </div>
+    </UserDashboard>
   );
 };
 

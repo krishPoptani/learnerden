@@ -1,9 +1,11 @@
 import ContactForm from '@/component/ContactForm'
 import ContactLeftContainer from '@/component/ContactLeftContainer'
+import UserDashboard from '@/routes/userside/page'
 import React from 'react'
 
 const Contact = () => {
   return (
+    <UserDashboard>
       <div className="py-8 bg-[#FAFAFA]">
         {/* Heading */}
         <div className="max-w-7xl mx-auto px-4 mt-6">
@@ -17,6 +19,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      </UserDashboard>
   )
 }
 

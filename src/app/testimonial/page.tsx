@@ -1,9 +1,11 @@
 import Location from '@/component/Location'
 import TestimonialSection from '@/component/TestimonialSection'
+import UserDashboard from '@/routes/userside/page'
 import React from 'react'
 
 const Testimonial = () => {
   return (
+    <UserDashboard>
         <div className="pt-8">
       {/* Heading */}
       <div className="max-w-7xl mx-auto px-4 mt-6">
@@ -13,6 +15,7 @@ const Testimonial = () => {
         </div>
         <Location />
         </div>
+      </UserDashboard>
   )
 }
 

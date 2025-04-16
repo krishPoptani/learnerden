@@ -1,6 +1,7 @@
 // redux/slices/contactSlice.ts
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createSlice } from "@reduxjs/toolkit";
+import { hostUrl } from "@/utils/baseUrl";
 
 interface EmailPayload {
   firstName: string;
@@ -43,7 +44,7 @@ export const contactReducer = contactSlice.reducer;
 export const contactApi = createApi({
   reducerPath: "contactApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://aieducationpro.com/api/",
+    baseUrl: `${hostUrl}`,
   }),
   endpoints: (builder) => ({
     getContactUs: builder.query<ContactUs, void>({
