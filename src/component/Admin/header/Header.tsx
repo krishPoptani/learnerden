@@ -48,7 +48,7 @@ const AdminHeader = () => {
                 />
               </div>
               <div className="text-sm text-right">
-                <p className="text-gray-800 font-medium leading-4">Saransh</p>
+                <p className="text-gray-800 font-medium leading-4">Admin</p>
                 <p className="text-gray-500 text-xs">Admin</p>
               </div>
               <svg

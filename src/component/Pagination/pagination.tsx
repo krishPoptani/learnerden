@@ -50,7 +50,8 @@ const Pagination: React.FC<PaginationProps> = ({
     (type === 'prev' && currentPage === 1) || (type === 'next' && currentPage === totalPages);
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center mt-8 gap-4">
+    <div className='max-w-7xl mx-auto px-4'>
+    <div className="flex flex-col  md:flex-row justify-between items-center mt-8 gap-4">
       {totalRecords !== undefined && (
         <p className="text-[#928989] mt-4 text-sm">
           Showing {getShowingRange()} of {totalRecords} Records
@@ -110,6 +111,7 @@ const Pagination: React.FC<PaginationProps> = ({
           <img src={Icon} alt="Next" className="w-3 h-3 filter invert" />
         </button>
       </div>
+    </div>
     </div>
   );
 };
