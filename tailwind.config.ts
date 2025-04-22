@@ -9,6 +9,7 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/component/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/routes/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -17,7 +18,7 @@ export default {
         foreground: "var(--foreground)",
         primary: "#5C50E4",
         secondary: "#4A3AFF",
-        gray: "#5F5B53",
+        customgray: "#5F5B53",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -28,6 +29,7 @@ export default {
         poppins: ["Poppins", ...defaultTheme.fontFamily.sans], // Default font
         sen: ["Sen"], // Secondary font
         lato: ["lato"],
+        mulish: ["Mulish"],
       },
       backgroundImage: {
         "footer-gradient":

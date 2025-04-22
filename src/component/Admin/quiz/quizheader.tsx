@@ -5,11 +5,12 @@ import React from "react";
 interface QuizHeaderProps {
   query: string;
   setQuery: (value: string) => void;
+  setAddQuizModal: (value: boolean) => void;
 }
 
-const QuizHeader: React.FC<QuizHeaderProps> = ({ query, setQuery }) => {
+const QuizHeader: React.FC<QuizHeaderProps> = ({ query, setQuery, setAddQuizModal }) => {
   const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(e.target);
+    setAddQuizModal(true);
   };
 
   return (
@@ -34,4 +35,3 @@ const QuizHeader: React.FC<QuizHeaderProps> = ({ query, setQuery }) => {
 };
 
 export default QuizHeader;
-

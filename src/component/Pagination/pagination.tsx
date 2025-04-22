@@ -50,7 +50,7 @@ const Pagination: React.FC<PaginationProps> = ({
     (type === 'prev' && currentPage === 1) || (type === 'next' && currentPage === totalPages);
 
   return (
-    <div className='max-w-7xl mx-auto px-4'>
+    <div className='max-w-7xl mx-auto px-4 w-full'>
     <div className="flex flex-col  md:flex-row justify-between items-center mt-8 gap-4">
       {totalRecords !== undefined && (
         <p className="text-[#928989] mt-4 text-sm">

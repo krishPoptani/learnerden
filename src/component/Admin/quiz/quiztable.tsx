@@ -171,7 +171,7 @@ const QuizTable = () => {
     <div className="max-w-7xl mx-auto bg-white shadow mt-2">
       <div className="max-h-[calc(100vh-325px)] overflow-y-auto">
         <table className="min-w-full text-sm text-left text-gray-600">
-          <thead className="sticky top-0 bg-[#DAD9F0] text-[16px] text-[#4F4AB0] z-[100]">
+          <thead className="sticky top-0 bg-[#DAD9F0] text-[16px] text-[#4F4AB0] z-[2]">
             <tr>
               <th className="p-4">
                 <input type="checkbox" />
@@ -239,15 +239,15 @@ const QuizTable = () => {
                 >
                   {quiz.status}
                 </td>
-                <td className="px-4 py-3 relative">
-                  <button className="text-gray-500 hover:text-gray-800">
+                <td className="px-4 py-3 relative text-center">
+                  <button className="text-gray-500 hover:text-gray-800 ">
                     <MoreHorizontal
                       size={18}
                       onClick={() => toggleDropdown(quiz.id)}
                     />
                   </button>
                   {openDropdownId === quiz.id && (
-                    <div className="absolute right-0 top-full w-[120px] bg-white border border-[#A0A0A0] rounded-lg shadow-lg z-50">
+                    <div className="absolute right-0 top-full w-[120px] bg-white border border-[#A0A0A0] rounded-lg shadow-lg z-[2]">
                       {[
                         {
                           label: "View",
