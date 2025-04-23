@@ -10,7 +10,11 @@ type QuizQuestion = {
   level: "Beginner" | "Intermediate" | "Advanced";
 };
 
-const QuestionWrapper = () => {
+type QuestionWrapperProps = {
+  setModal : (value : Boolean) => void
+}
+
+const QuestionWrapper : React.FC<QuestionWrapperProps> = ({setModal}) => {
 
   const quizData: QuizQuestion[] = [
   {
@@ -40,9 +44,10 @@ const QuestionWrapper = () => {
           key={quiz.id}
           {...quiz}
           onLevelChange={(val) => console.log(`Level for ${quiz.id}:`, val)}
-          onEdit={() => console.log(`Edit clicked for ${quiz.id}`)}
+          onEdit={() => setModal(true)}
           onDelete={() => console.log(`Delete clicked for ${quiz.id}`)}
           onAdd={() => console.log(`Add clicked for ${quiz.id}`)}
+          setModal = {setModal}
         />
       ))}
     </div>

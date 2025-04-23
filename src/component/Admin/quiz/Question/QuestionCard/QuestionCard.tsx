@@ -8,6 +8,7 @@ export interface QuizQuestionProps {
   options: Option[];
   correctAnswer: string;
   level: "Beginner" | "Intermediate" | "Advanced";
+    setModal : (value : Boolean) => void
   onLevelChange?: (level: string) => void;
   onEdit?: () => void;
   onDelete?: () => void;
@@ -29,6 +30,7 @@ const QuizQuestionCard: FC<QuizQuestionProps> = ({
   onEdit,
   onDelete,
   onAdd,
+  setModal
 }) => {
   return (
     <div className="border rounded-xl px-4 py-8 shadow-sm bg-white">

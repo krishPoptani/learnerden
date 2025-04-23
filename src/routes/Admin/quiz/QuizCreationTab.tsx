@@ -5,6 +5,8 @@ import QuestionWrapper from "@/component/Admin/quiz/Question/QuestionWrapper/Que
 import QuestionStatWrapper from "@/component/Admin/quiz/Question/QuestionStatsWrapper/QuestionStatsWrapper";
 import QuizInfoCard from "@/component/Admin/quiz/Question/QuizInfoCard/QuizInfoCard";
 import Pagination from "@/component/Pagination/pagination";
+import Modal from "@/component/Modal/Modal";
+import QuestionEditor from "./QuestionEditor";
 
 const backBtn = `/icons/backbtn.svg`;
 
@@ -12,6 +14,7 @@ export default function QuizCreationTab() {
   const [page, setPage] = useState(1);
   const totalPages = 10;
   const totalRecords = 95;
+    const [modal, setModal] = useState<Boolean>(false)
 
   return (
     <div className="bg-white flex flex-col h-screen z-[9999]">
@@ -30,11 +33,15 @@ export default function QuizCreationTab() {
 
       {/* Main Content */}
         <div className="max-w-7xl mt-6 w-full mx-auto flex flex-col gap-6">
+          <div className="flex justify-end gap-5">
+            <button className="border-none cursor-pointer min-w-[160px] text-white bg-[#981C51] rounded-full py-2">Quiz Verification</button>
+            <button className="border-none cursor-pointer min-w-[160px] text-white bg-[#4F4AB0] rounded-full py-2">Publish</button>
+          </div>
           <QuizInfoCard />
           <div className="max-w-7xl flex flex-col shadow-xl gap-6 rounded-xl pb-2">
             <QuestionStatWrapper />
             <div className="pb-2">
-            <QuestionWrapper />
+            <QuestionWrapper setModal={setModal}/>
               <Pagination
                 currentPage={page}
                 totalPages={totalPages}
@@ -46,6 +53,11 @@ export default function QuizCreationTab() {
 
         {/* Pagination outside of mx-auto */}
       </div>
+          {modal && 
+    <Modal header="Edit Question 1" width="720px"  onClose={() => setModal(false)}>
+      <QuestionEditor />
+    </Modal>
+    }
     </div>
   );
 }

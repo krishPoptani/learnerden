@@ -1,18 +1,19 @@
 "use client";
 
-import React from "react";
-import QuestionWrapper from "@/component/Admin/quiz/Question/QuestionWrapper/QuestionWrapper";
-import QuestionStatWrapper from "@/component/Admin/quiz/Question/QuestionStatsWrapper/QuestionStatsWrapper";
-
-
+import Modal from "@/component/Modal/Modal";
+import QuestionEditor from "@/routes/Admin/quiz/QuestionEditor";
+import { useState } from "react";
 
 export default function MyForm() {
-
+  const [modal, setModal] = useState<Boolean>(true)
 
   return (
     <>
-    <QuestionStatWrapper />
-    <QuestionWrapper />
+    {modal && 
+    <Modal header="Edit Question 1" width="720px"  onClose={() => setModal(false)}>
+      <QuestionEditor />
+    </Modal>
+    }
     </>
   );
 }
