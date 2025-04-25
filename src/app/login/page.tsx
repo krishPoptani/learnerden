@@ -1,11 +1,14 @@
 "use client"
 import UserDashboard from '@/routes/userside/page';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 export default function Login() {
   const [activeTab, setActiveTab] = useState<'student' | 'tutor'>('student');
+  const router = useRouter()
   const loginSubmit = () => {
     localStorage.setItem('login', 'true');
+    router.push('/profile')
   }
   return (
     <UserDashboard>
@@ -64,7 +67,7 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-[#8D8D8D] mb-1">Passcword</label>
+                  <label className="block text-sm text-[#8D8D8D] mb-1">Password</label>
                   <input
                     type="password"
                     placeholder="Enter your Password"
@@ -74,7 +77,7 @@ export default function Login() {
 
                 <div className="flex justify-between items-center text-sm text-gray-600">
                   <label className="flex items-center">
-                    <input type="checkbox" className="mr-2 accent-[#5F3FF8]" /> Remember mecc
+                    <input type="checkbox" className="mr-2 accent-[#5F3FF8]" /> Remember me
                   </label>
                   <a href="#" className="text-[#5F3FF8] hover:underline">Forgot Password ?</a>
                 </div>

@@ -99,7 +99,7 @@ export default function QuizResult() {
           <div className="bg-whitefit-content shadow rounded-lg p-6 mb-6 border border-[#A0A0A066]">
             <h3 className="text-center text-3xl font-bold text-f4a mb-2">Your Result</h3>
             <div className="flex justify-center items-center gap-6 font-medium text-3xl">
-              <span className="text-[#292929]">😟 40.7%</span>
+              <span className="text-[#292929]">😟 40%</span>
               <span className="text-[#292929] ">✅ 2</span>
               <span className="text-[#292929] ">❌ 3</span>
             </div>

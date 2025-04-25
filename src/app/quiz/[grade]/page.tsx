@@ -17,7 +17,7 @@ export default function QuizPage() {
   const searchParams = useSearchParams();
   const grade = decodeURIComponent(params.grade as string);
   const handleGradeClick = (value: string) => {
-    router.push(`/quiz/${grade}/${value}`);
+   router .push(`/quiz/${grade}/${value}`);
   };
 
   // Populate state from URL or use default

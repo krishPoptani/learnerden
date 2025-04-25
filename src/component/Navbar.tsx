@@ -1,16 +1,16 @@
 'use client';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetContactUsQuery } from '../../slices/contactForm';
 import { setContact } from '../../slices/contactForm';
-const profileIcon='/images/profile_icon.png'
+const profileIcon = '/images/profile_icon.png'
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [userDropdown, setUserDropdown] = useState(false)
   const currentPath = usePathname(); // Get the current route
-
+  const router = useRouter()
 
   // Fetch contact data if not already available in the store
   const { data, isLoading, isError } = useGetContactUsQuery();
@@ -24,7 +24,10 @@ export default function Navbar() {
       dispatch(setContact(data)); // Store the fetched data in Redux
     }
   }, [data, dispatch]);
-
+  const logOut = () => {
+    localStorage.removeItem('login')
+    router.push('/');
+  }
   return (
     <nav className="bg-white border-b border-[#aeaeae] shadow-sm relative">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
@@ -122,7 +125,7 @@ export default function Navbar() {
                   className="flex items-center gap-3 cursor-pointer"
                   onClick={() => setUserDropdown(!userDropdown)}
                 >
-                  <img className='w-[50px] h-[50px]' src={profileIcon} alt='profileIcon'/>
+                  <img className='w-[50px] h-[50px]' src={profileIcon} alt='profileIcon' />
                   <div>
                     <span className='text-[#2E2E48] font-semibold'>Ali Raza</span>
                     <p className="text-sm font-normal text-[#808080]">Student</p>
@@ -139,9 +142,9 @@ export default function Navbar() {
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md  z-10">
                     <ul className="py-2 text-sm text-gray-700">
                       <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]"><Link className='block w-full' href='/profile'>Profile</Link></li>
-                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]">Report</li>
+                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]"><Link className='block w-full' href='/userReport'>Report</Link></li>
                       <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]">Downloads</li>
-                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]">Log Out</li>
+                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]" onClick={() => logOut()}>Log Out</li>
                     </ul>
                   </div>
                 )}

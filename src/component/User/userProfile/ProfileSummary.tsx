@@ -1,9 +1,10 @@
 import React from 'react';
+const profileIcon='/images/profile_icon.png'
 
 const ProfileSummary: React.FC = () => (
   <div className="bg-[#F6F6F6] mb-4 p-6 rounded-xl shadow-md flex items-center gap-6">
     <div className="relative">
-      <img src="/avatar.png" className="w-24 h-24 rounded-full" />
+    <img className='w-24 h-24 rounded-full' src={profileIcon} alt='profileIcon'/>
       <button className="absolute bottom-0 right-0 bg-purple-500 p-1 rounded-full text-white text-xs">✏️</button>
     </div>
     <div className="grid grid-cols-2 gap-4">
