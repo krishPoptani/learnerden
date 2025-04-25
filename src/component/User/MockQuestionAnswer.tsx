@@ -12,8 +12,8 @@ const MockQuestionAnswer = ({
 }) => {
 
     return (
-        <div className="w-3/4  mx-auto my-6 p-4 " >
-            <div className="shadow-md rounded-xl p-7">
+        <div className="w-3/4  mx-auto my-2 p-3 " >
+            <div className="shadow-md rounded-xl p-5">
                 <h2 className="text-base font-medium text-[#BEBDBD] mb-2">Question {question?.id} </h2>
                 <p className="font-normal text-lg text-[#707070]">{question.text}</p>
             </div>
@@ -21,8 +21,8 @@ const MockQuestionAnswer = ({
                 {question.options.map((opt, idx) => (
                     <label
                         key={idx}
-                        className={`flex items-center justify-between gap-3 border border-[#939393] px-4 py-3 my-9 rounded-lg cursor-pointer transition-all 
-            ${currentAnswer === opt ? 'shadow-[0_0_50px_rgba(104,74,223,0.5)]' : ''}`}
+                        className={`flex items-center justify-between gap-3 border border-[#939393] px-4 py-3 my-4 rounded-lg cursor-pointer transition-all 
+            ${currentAnswer === opt ? 'border border-f4a' : ''}`}
                         onClick={() => onAnswer(opt)}
                     >
                         <span className="text-lg font-medium text-[#707070]">{opt}</span>

@@ -42,7 +42,7 @@ const MockTest = () => {
     const [answers, setAnswers] = useState<{ [key: number]: string }>({});
     const [reviewed, setReviewed] = useState<number[]>([]);
     const [isSubmitted, setIsSubmitted] = useState(false); // 🔥 New
-    const initialMinutes = 5;
+    const initialMinutes = 50;
     const [secondsLeft, setSecondsLeft] = useState(initialMinutes * 60);
 
     useEffect(() => {
@@ -92,39 +92,51 @@ const MockTest = () => {
     if (isSubmitted) {
         const score = Object.keys(answers).length;
         return (
-         
-           <QuizResult/>
+            <QuizResult />
         );
     }
     return (
-        <div className="container max-w-7xl mx-auto bg-white p-6">
-            <div className="flex justify-between items-center">
-                <h1 className="text-2xl font-semibold text-[#2E2E48]">Algebra and Functions Quiz</h1>
-                <Timer secondsLeft={secondsLeft} />
-            </div>
+        <div>
+            <div className="fixed top-0  mx-auto left-0 right-0 bg-white z-50">
+                <div className="bg-f4a text-2xl text-white ">
+                    <div className=" max-w-7xl mx-auto flex justify-between py-5">
+                        <h2>Global Learner Den</h2>
+                        <p>x</p>
+                    </div>
+                </div>
+                <div className="container max-w-7xl mx-auto bg-white py-3">
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-2xl font-semibold text-[#2E2E48]">Algebra and Functions Quiz</h1>
+                        <Timer secondsLeft={secondsLeft} />
+                    </div>
 
-            <MockProgressBar answeredCount={Object.keys(answers).length} total={questions.length}
-                onReviewToggle={markAsReview}
-                isReviewed={reviewed.includes(currentQuestion)}
-            />
-            <MockQuestionNavigator
-                questions={questions}
-                currentQuestion={currentQuestion}
-                answers={answers}
-                reviewed={reviewed}
-                setCurrentQuestion={setCurrentQuestion}
-            />
-            <MockQuestionAnswer
-                question={questions[currentQuestion]}
-                currentAnswer={answers[currentQuestion]}
-                onAnswer={handleAnswer}
-            />
-            <NavigationButtons
-                onPrevious={handlePrevious}
-                onNext={currentQuestion === questions.length - 1 ? handleSubmit : handleNext} // 🔥 Submit on last      
-                isLast={currentQuestion === questions.length - 1} // 🔥 Pass down to change button text
-            />
+                    <MockProgressBar answeredCount={Object.keys(answers).length} total={questions.length}
+                        onReviewToggle={markAsReview}
+                        isReviewed={reviewed.includes(currentQuestion)}
+                    />
+                    <MockQuestionNavigator
+                        questions={questions}
+                        currentQuestion={currentQuestion}
+                        answers={answers}
+                        reviewed={reviewed}
+                        setCurrentQuestion={setCurrentQuestion}
+                    />
+                </div>
+            </div>
+            <div className="py-5" style={{ paddingTop: '230px' }}>
+                <MockQuestionAnswer
+                    question={questions[currentQuestion]}
+                    currentAnswer={answers[currentQuestion]}
+                    onAnswer={handleAnswer}
+                />
+                <NavigationButtons
+                    onPrevious={handlePrevious}
+                    onNext={currentQuestion === questions.length - 1 ? handleSubmit : handleNext} // 🔥 Submit on last      
+                    isLast={currentQuestion === questions.length - 1} // 🔥 Pass down to change button text
+                />
+            </div>
         </div>
+
     );
 };
 

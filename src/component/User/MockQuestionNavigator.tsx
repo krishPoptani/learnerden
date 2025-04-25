@@ -15,7 +15,7 @@ const MockQuestionNavigator = ({
     setCurrentQuestion: (index: number) => void
 }) => {
     return (
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex justify-center gap-2 mt-3">
             {questions.map((_, i) => {
                 let bg = 'border border-[#AAAAAA] text-[#707070]';
 
