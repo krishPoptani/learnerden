@@ -18,7 +18,8 @@ export default {
         foreground: "var(--foreground)",
         primary: "#5C50E4",
         secondary: "#4A3AFF",
-        customgray: "#5F5B53",
+        gray: "#5F5B53",
+        f4a: '#4F4AB0',
       },
       borderRadius: {
         lg: "var(--radius)",
