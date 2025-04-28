@@ -1,19 +1,24 @@
-"use client";
+"use client"
 
-import Modal from "@/component/Modal/Modal";
-import QuestionEditor from "@/routes/Admin/quiz/QuestionEditor";
-import { useState } from "react";
+import { showAlertPopupError } from "@/component/AlertPopup/Alert"
+import Loader from "@/component/Loader/Loader"
+import Modal from "@/component/Modal/Modal"
+import QuestionEditor from "@/routes/Admin/quiz/QuestionEditor"
+import { useEffect, useState } from "react"
 
 export default function MyForm() {
-  const [modal, setModal] = useState<Boolean>(true)
+  const [modal, setModal] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (modal) {
+      showAlertPopupError("Something went wrong", "Please try again later")
+    }
+  }, [modal])
 
   return (
     <>
-    {modal && 
-    <Modal header="Edit Question 1" width="720px"  onClose={() => setModal(false)}>
-      <QuestionEditor />
-    </Modal>
-    }
+      {modal && <Loader />}
     </>
-  );
+  )
 }
+

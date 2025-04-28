@@ -205,7 +205,7 @@ const QuestionEditor = () => {
       <div className="text-center pt-4">
         <Button
           type="submit"
-          className="bg-[#4F4AB0] text-white px-20 py-2 rounded-md"
+          className="bg-[#4F4AB0] hover:bg-[#4F4AB0] text-white px-20 py-2 rounded-md"
         >
           Save
         </Button>
