@@ -1,24 +1,10 @@
-"use client"
+import QuestionStats from "@/component/Report/Quiz/QuizCard";
+import ViewQuizTab from "@/routes/Admin/quiz/ViewQuizTab";
 
-import { showAlertPopupError } from "@/component/AlertPopup/Alert"
-import Loader from "@/component/Loader/Loader"
-import Modal from "@/component/Modal/Modal"
-import QuestionEditor from "@/routes/Admin/quiz/QuestionEditor"
-import { useEffect, useState } from "react"
-
-export default function MyForm() {
-  const [modal, setModal] = useState<boolean>(true)
-
-  useEffect(() => {
-    if (modal) {
-      showAlertPopupError("Something went wrong", "Please try again later")
-    }
-  }, [modal])
-
+export default function Example(){
   return (
-    <>
-      {modal && <Loader />}
-    </>
-  )
-}
-
+    // <div className="max-w-xl mx-auto mt-8">
+      <ViewQuizTab />
+    // </div>
+  );
+};

@@ -34,17 +34,32 @@ export const menu = {
       submenu: [
         {
           id: 5,
-          label: "User Management",
-          route: "/usermanagement",
+          label: "Student",
+          route: "/student",
+        },
+        {
+          id: 8,
+          label: "Tutor",
+          route: "/tutor",
+        },
+        {
+          id: 9,
+          label: "Parent",
+          route: "/parent",
         },
       ],
+    },
+    {
+      route: "/report",
+      label: "Report",
+      id: "10",
     },
     {
       route: "/filestorage",
       label: "File Storage",
       id: "6",
     },
-        {
+    {
       route: "/settings",
       label: "Settings",
       id: "7",
