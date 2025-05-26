@@ -36,12 +36,14 @@ export default function AddQuizModal() {
       >
         {/* Select PDF Format */}
         <div className="col-span-2">
-          <label className="block font-medium mb-2">Select PDF Format *</label>
-          <div className="flex gap-6">
+          <label htmlFor="pdfFormat" className="block font-medium mb-2">
+            Select PDF Format *
+          </label>
+          <div className="flex gap-6" id="pdfFormat">
             <label className="flex items-center gap-2">
               <input
                 type="radio"
-                name="pdfFormat"
+                id="extract"
                 value="extract"
                 {...register("pdfFormat", { required: true })}
               />
@@ -50,7 +52,7 @@ export default function AddQuizModal() {
             <label className="flex items-center gap-2">
               <input
                 type="radio"
-                name="pdfFormat"
+                id="generate"
                 value="generate"
                 {...register("pdfFormat", { required: true })}
               />
