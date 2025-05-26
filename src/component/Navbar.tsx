@@ -30,7 +30,14 @@ export default function Navbar() {
       router.push('/');
     }
   }
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('login');
+    setIsLoggedIn(loginStatus === 'true');
+  }, []);
+
+  if (isLoggedIn === null) return null;
   return (
     <nav className="bg-white border-b border-[#aeaeae] shadow-sm relative">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
@@ -121,16 +128,16 @@ export default function Navbar() {
                 ontact
               </span>
             </Link>
-            {localStorage.getItem('login') ?
+            {isLoggedIn ? (
               <div className="relative">
                 {/* Trigger */}
                 <div
                   className="flex items-center gap-3 cursor-pointer"
                   onClick={() => setUserDropdown(!userDropdown)}
                 >
-                  <img className='w-[50px] h-[50px]' src={profileIcon} alt='profileIcon' />
+                  <img className="w-[50px] h-[50px]" src={profileIcon} alt="profileIcon" />
                   <div>
-                    <span className='text-[#2E2E48] font-semibold'>Ali Raza</span>
+                    <span className="text-[#2E2E48] font-semibold">Ali Raza</span>
                     <p className="text-sm font-normal text-[#808080]">Student</p>
                   </div>
                   <div>
@@ -142,25 +149,29 @@ export default function Navbar() {
 
                 {/* Dropdown Menu */}
                 {userDropdown && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md  z-10">
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md z-10">
                     <ul className="py-2 text-sm text-gray-700">
-                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]"><Link className='block w-full' href='/profile'>Profile</Link></li>
-                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]"><Link className='block w-full' href='/userReport'>Report</Link></li>
-                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]">Downloads</li>
-                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]" onClick={() => logOut()}>Log Out</li>
+                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]">
+                        <Link className="block w-full" href="/profile">Profile</Link>
+                      </li>
+                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]">
+                        <Link className="block w-full" href="/userReport">Report</Link>
+                      </li>
+                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]">
+                        Downloads
+                      </li>
+                      <li className="mx-4 py-2 hover:bg-gray-100 cursor-pointer border-b border-[#E3E3E3]" onClick={logOut}>
+                        Log Out
+                      </li>
                     </ul>
                   </div>
                 )}
-              </div> :
-              <Link
-                href="/login"
-                className={`bg-[#2A497C] text-white px-7 py-2 rounded-full`}
-              >
-                <button>
-                  Login
-                </button>
+              </div>
+            ) : (
+              <Link href="/login" className="bg-[#2A497C] text-white px-7 py-2 rounded-full">
+                <button>Login</button>
               </Link>
-            }
+            )}
             {/* <div>
           <button className='px-6 py-2 font-medium rounded-3xl transition duration-300 ease-in-out bg-[#2A497C] text-[#fff]'>Book Demo</button>
         </div> */}
