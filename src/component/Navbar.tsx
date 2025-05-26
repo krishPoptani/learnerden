@@ -25,9 +25,12 @@ export default function Navbar() {
     }
   }, [data, dispatch]);
   const logOut = () => {
-    localStorage.removeItem('login')
-    router.push('/');
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('login');
+      router.push('/');
+    }
   }
+
   return (
     <nav className="bg-white border-b border-[#aeaeae] shadow-sm relative">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">

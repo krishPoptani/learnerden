@@ -7,8 +7,10 @@ export default function Login() {
   const [activeTab, setActiveTab] = useState<'student' | 'tutor'>('student');
   const router = useRouter()
   const loginSubmit = () => {
-    localStorage.setItem('login', 'true');
-    router.push('/profile')
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('login', 'true');
+      router.push('/profile');
+    }
   }
   return (
     <UserDashboard>
