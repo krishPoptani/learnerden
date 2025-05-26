@@ -15,7 +15,7 @@ export default function Login() {
 
       <div className="min-h-screen relative  bg-white">
         {/* Left Section */}
-        <div className="flex-1 bg-[#1F3266] text-white p-14 flex flex-col justify-center items-start">
+        <div className="flex-1 bg-[#5D5FEF] text-white p-14 flex flex-col justify-center items-start">
           <h1 className="text-4xl font-bold leading-snug">
             Empower Your<br />
             Learning Journey –<br />
@@ -32,7 +32,7 @@ export default function Login() {
         </div>
 
         {/* Right Section */}
-        <div className='absolute' style={{ right: '100px', top: '70px' }}>
+        <div className='absolute' style={{ right: '70px', top: '70px' }}>
 
           <div className=" bg-white rounded-xl shadow" style={{ width: '540px' }}>
             <div className="w-full  p-8">
@@ -90,7 +90,7 @@ export default function Login() {
                 </button>
 
                 <div className="text-center text-sm mt-4">
-                  <span className='text-[#8D8D8D]'> No Account ?</span> <a href="#" className="text-[#0089ED] font-medium hover:underline">Sign up</a>
+                  <span className='text-[#8D8D8D]'> No Account ?</span> <a href="/signup" className="text-[#0089ED] font-medium hover:underline">Sign up</a>
                 </div>
               </form>
             </div>
