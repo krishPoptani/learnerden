@@ -2,14 +2,14 @@ import { useState } from "react";
 interface Props {
     setGrade: React.Dispatch<React.SetStateAction<boolean>>;
   }
-export default function StudentUnderGrade12Form(setGrade:Props) {
+export default function StudentUnderGrade12Form({setGrade}:Props) {
     const [parentstudent, setParentStudent] = useState<string>('parent')
     return (
         <form className="space-y-4" >
             {parentstudent == 'parent' ? <>
                 <div className="flex justify-between">
                     <h5>Parent’s Details</h5>
-                    <span>Have you completed <span>Grade 12?</span></span>
+                    <span onClick={() => setGrade(false)}>Have you completed <span>Grade 12?</span></span>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>

@@ -7,8 +7,8 @@ export default function StudentSignUpForm() {
 
   return (
     <div>
-      {grade == false && <StudentUnderGrade12Form setGrade={setGrade}/>}
-      {grade == true && <StudentGrade12PlusForm setGrade={setGrade}/>}
+      {grade == true && <StudentUnderGrade12Form setGrade={setGrade}/>}
+      {grade == false && <StudentGrade12PlusForm setGrade={setGrade}/>}
     </div>
   );
 }

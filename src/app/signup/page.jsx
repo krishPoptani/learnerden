@@ -18,7 +18,7 @@ const SignUp = () => {
                         Sign in to Connect<br />
                         & Grow!
                     </h1>
-                    <div className="absolute" style={{ left: '180px', top: '70px' }}>
+                    <div className="absolute" style={{ left: '380px', top: '70px' }}>
                         <img
                             src={LoginImgIcon}
                             alt="Rocket Girl"

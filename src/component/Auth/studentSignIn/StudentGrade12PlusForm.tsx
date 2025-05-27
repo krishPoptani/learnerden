@@ -1,12 +1,12 @@
 interface Props {
     setGrade: React.Dispatch<React.SetStateAction<boolean>>;
   }
-export default function StudentGrade12PlusForm(setGrade:Props) {
+export default function StudentGrade12PlusForm({setGrade}:Props) {
     return (
         <form className="space-y-4">
             <div className="flex justify-between items-center">
                 <h5>Student’s Details</h5>
-                <span className="text-[13px]">Have you completed <span>not yet completed Grade 12?</span></span>
+                <span  onClick={() => setGrade(true)} className="text-[13px]">Have you completed <span>not yet completed Grade 12?</span></span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>

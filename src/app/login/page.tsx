@@ -1,17 +1,27 @@
 "use client"
+import { userSignIn } from '@/lib/authfunction';
 import UserDashboard from '@/routes/userside/page';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+const LoginImgIcon = '/icons/login_img.svg'
 
 export default function Login() {
   const [activeTab, setActiveTab] = useState<'student' | 'tutor'>('student');
   const router = useRouter()
-  const loginSubmit = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('login', 'true');
-      router.push('/profile');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      await userSignIn({ email, password });
+      console.log('Login success!');
+    } catch (err) {
+      console.error('Login failed:', err);
     }
-  }
+  };
+
   return (
     <UserDashboard>
 
@@ -24,13 +34,13 @@ export default function Login() {
             Sign in to Connect<br />
             & Grow!
           </h1>
-          {/* <div className="mt-10">
-          <img
-            src="/rocket-girl.png"
-            alt="Rocket Girl"
-            className="max-w-xs"
-          />
-        </div> */}
+          <div className="absolute" style={{ left: '380px', top: '70px' }}>
+            <img
+              src={LoginImgIcon}
+              alt="Rocket Girl"
+              className="max-w-xs"
+            />
+          </div>
         </div>
 
         {/* Right Section */}
@@ -64,6 +74,8 @@ export default function Login() {
                   <label className="block text-sm text-[#8D8D8D] mb-1">Email</label>
                   <input
                     type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your Email Address"
                     className="w-full py-2 px-2 border-b border-[#8D8D8D]"
                   />
@@ -72,6 +84,8 @@ export default function Login() {
                   <label className="block text-sm text-[#8D8D8D] mb-1">Password</label>
                   <input
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your Password"
                     className="w-full py-2 px-2 border-b border-[#8D8D8D] text-[#A7A7A7]"
                   />
@@ -81,7 +95,7 @@ export default function Login() {
                   <label className="flex items-center">
                     <input type="checkbox" className="mr-2 accent-[#5F3FF8]" /> Remember me
                   </label>
-                  <a href="#" className="text-[#5F3FF8] hover:underline">Forgot Password ?</a>
+                  <a href="#" className="text-[#5F3FF8] hover:underline">Forgot Password?</a>
                 </div>
 
                 <button
@@ -92,7 +106,8 @@ export default function Login() {
                 </button>
 
                 <div className="text-center text-sm mt-4">
-                  <span className='text-[#8D8D8D]'> No Account ?</span> <a href="/signup" className="text-[#0089ED] font-medium hover:underline">Sign up</a>
+                  <span className="text-[#8D8D8D]">No Account?</span>
+                  <a href="/signup" className="text-[#0089ED] font-medium hover:underline"> Sign up</a>
                 </div>
               </form>
             </div>
