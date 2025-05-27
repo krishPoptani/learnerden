@@ -13,12 +13,11 @@ export default function Login() {
 
   const loginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       await userSignIn({ email, password });
       console.log('Login success!');
     } catch (err) {
-      console.error('Login failed:', err);
+      console.log('Login failed:', err);
     }
   };
 

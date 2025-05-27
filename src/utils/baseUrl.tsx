@@ -3,7 +3,7 @@ export const hostChat = 'http://192.168.29.18:62234/'
   // const protocol = 'https'
   // const host = 'aieducationpro.com/api/' // bhargav
 const protocol = 'https'
-const host = 'node.aieducationpro.com' // bhargav
+const host = 'node.aieducationpro.com/api/v1' // bhargav
 
 const port = ''
 const trailUrl = ''
