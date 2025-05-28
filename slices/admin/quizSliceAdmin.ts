@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { hostUrl } from '@/utils/baseUrl';
 
-export const QuizUserApi = createApi({
-    reducerPath: 'QuizUserApi',
+export const QuizAdminApi = createApi({
+    reducerPath: 'QuizAdminApi',
     baseQuery: fetchBaseQuery({
         baseUrl: hostUrl,
         prepareHeaders: (headers) => {
@@ -24,22 +24,14 @@ export const QuizUserApi = createApi({
     }),
     tagTypes: ['QuizType'],
     endpoints: (builder) => ({
-        
-       getOneGradeQuizDetails: builder.query({
+       getQuizDetails: builder.query({
             query: ({ offset,limit,id }) => ({
-                url: `masterService/grade/get-One-grade-QuizDetails?offset=${offset}&limit=${limit}&id=${id}`,
-                method: "GET",
-            }),
-        }),
-        quizQuestionAnswer: builder.query({
-            query: ({ attemptId }) => ({
-                url: `masterService/quiz-result/quiz?attemptId=${attemptId}`,
+                url: `masterService/quiz-details/get?offset=${offset}&limit=${limit}`,
                 method: "GET",
             }),
         }),
     }),
 });
 export const {
-   useGetOneGradeQuizDetailsQuery,
-   useQuizQuestionAnswerQuery
-} = QuizUserApi;
+   useGetQuizDetailsQuery,
+} = QuizAdminApi;

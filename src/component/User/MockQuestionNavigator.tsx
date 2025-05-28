@@ -16,7 +16,7 @@ const MockQuestionNavigator = ({
 }) => {
     return (
         <div className="flex justify-center gap-2 mt-3">
-            {questions.map((_, i) => {
+            {questions?.map((_, i) => {
                 let bg = 'border border-[#AAAAAA] text-[#707070]';
 
                 if (reviewed.includes(i)) bg = 'bg-[#AAAAAA] text-[#707070]';

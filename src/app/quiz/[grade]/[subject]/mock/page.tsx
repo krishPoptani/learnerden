@@ -17,7 +17,7 @@ export default function MockTestPage() {
 
   const router = useRouter();
   const handleTakeTestClick = () => {
-    router.push(`/quiz/${grade}/${subject}/mock/test`);
+    router.push(`/quiz/${grade}/${subject}/mock/3f5e80ef-6e25-4b04-a6cb-14df80dd2db2`);
   }
   return (
     <UserDashboard>

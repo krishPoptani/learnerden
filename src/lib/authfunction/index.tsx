@@ -24,6 +24,7 @@ export async function userSignIn(info: LoginInfo, showToast = true): Promise<any
         const token = res?.data?.data?.token;
         setUserInfo(user)
         setToken(token)
+        window.location.href = '/superadmin/dashboard';
         if (showToast) {
             console.log("Login Sucessfull");
         }

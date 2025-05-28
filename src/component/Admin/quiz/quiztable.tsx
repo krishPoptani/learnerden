@@ -155,17 +155,30 @@ const statusColors: Record<string, string> = {
   Completed: "text-green-500",
   Generating: "text-[#CF8900]",
   Published: "text-[#4F4AB0]",
+  New: "text-green-500",
+  draft: "text-[#CF8900]",
 };
 
 const ViewIcon = '/icons/view_eye.svg'
 const ModifyIcon = '/icons/editlis.svg'
 
-const QuizTable = () => {
+const QuizTable = (getQuizDetails: any) => {
+  console.log(getQuizDetails?.getQuizDetails, "getQuizDetails");
+
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
   const toggleDropdown = (id: string) => {
     setOpenDropdownId((prev) => (prev === id ? null : id));
   };
+const handleView = (id: string | number): void => {
+  console.log("View quiz with ID:", id);
+  window.location.href = `/superadmin/quiz/${id}`;
+};
+
+const handleEdit = (id: string | number): void => {
+  console.log("Edit quiz with ID:", id);
+  window.location.href = `/superadmin/quiz/${id}`;
+};
 
   return (
     <div className="max-w-7xl mx-auto bg-white shadow mt-2">
@@ -191,9 +204,9 @@ const QuizTable = () => {
             </tr>
           </thead>
           <tbody>
-            {quizData.map((quiz, idx) => (
+            {getQuizDetails?.getQuizDetails?.data?.result?.map((quiz: any, idx: number) => (
               <tr
-                key={quiz.id}
+                key={quiz?.id}
                 className={`text-[#4E4E4E] border-b border-[rgba(160,160,160,0.3)]`}
               >
                 <td className="p-4">
@@ -201,18 +214,18 @@ const QuizTable = () => {
                 </td>
                 <td className="px-4 py-3 text-center">{idx + 1}</td>
                 <td className="px-4 py-3 text-[#4F4AB0] font-medium text-center">
-                  {quiz.id}
+                  {quiz?.quizId}
                 </td>
                 <td className="px-4 py-3 max-w-[320px]">
                   <div
-                    id={`quiz-title-${quiz.id}`}
+                    id={`quiz-title-${quiz?.id}`}
                     className="line-clamp-2 overflow-hidden text-ellipsis"
                   >
-                    {quiz.title}
+                    {quiz?.topic}
                   </div>
                   <Tooltip
-                    anchorId={`quiz-title-${quiz.id}`}
-                    content={quiz.title}
+                    anchorId={`quiz-title-${quiz?.id}`}
+                    content={quiz?.topic}
                     place="bottom"
                     style={{
                       width: "380px",
@@ -225,25 +238,24 @@ const QuizTable = () => {
                   />
                 </td>
 
-                <td className="px-4 py-3">{quiz.syllabus}</td>
-                <td className="px-4 py-3 text-center">{quiz.grade}</td>
-                <td className="px-4 py-3 text-center">{quiz.quizCount}</td>
-                <td className="px-4 py-3 text-center">{quiz.createdAt}</td>
-                <td className="px-4 py-3 text-center">{quiz.updatedAt}</td>
-                <td className="px-4 py-3 text-center">{quiz.createdBy}</td>
-                <td className="px-4 py-3 text-center">{quiz.updatedBy}</td>
+                <td className="px-4 py-3">{quiz?.subjectDetails?.name}</td>
+                <td className="px-4 py-3 text-center">{quiz?.gradeBoards?.name}</td>
+                <td className="px-4 py-3 text-center">{quiz?.totalQuiz}</td>
+                <td className="px-4 py-3 text-center">{quiz?.createdAt?.split("T")[0]}</td>
+                <td className="px-4 py-3 text-center">{quiz?.updatedAt?.split("T")[0]}</td>
+                <td className="px-4 py-3 text-center">Admin</td>
+                <td className="px-4 py-3 text-center">Admin</td>
                 <td
-                  className={`px-4 py-3 font-semibold ${
-                    statusColors[quiz.status]
-                  } text-center`}
+                  className={`px-4 py-3 font-semibold ${statusColors[quiz?.status]
+                    } text-center`}
                 >
-                  {quiz.status}
+                  {quiz?.status}
                 </td>
                 <td className="px-4 py-3 relative text-center">
                   <button className="text-gray-500 hover:text-gray-800 ">
                     <MoreHorizontal
                       size={18}
-                      onClick={() => toggleDropdown(quiz.id)}
+                      onClick={() => toggleDropdown(quiz?.id)}
                     />
                   </button>
                   {openDropdownId === quiz.id && (
@@ -252,26 +264,28 @@ const QuizTable = () => {
                         {
                           label: "View",
                           icon: ViewIcon,
+                          onClick: () => handleView(quiz.id),  // View action
                         },
                         {
                           label: "Edit",
                           icon: ModifyIcon,
+                          onClick: () => handleEdit(quiz.id),  // Optional: Edit action
                         },
                       ].map((action, idx) => (
                         <div
                           key={idx}
                           className="flex items-center gap-2 px-2 py-1 hover:bg-gray-100 border-b border-[#A0A0A0] last:border-b-0 cursor-pointer"
+                          onClick={action.onClick}  // Add onClick here
                         >
-                          <div className="p-1 rounded-md"> 
+                          <div className="p-1 rounded-md">
                             <img src={action.icon} width={24} height={24} alt={action.label} />
                           </div>
-                          <span className="text-gray-700 text-sm">
-                            {action.label}
-                          </span>
+                          <span className="text-gray-700 text-sm">{action.label}</span>
                         </div>
                       ))}
                     </div>
                   )}
+
                 </td>
               </tr>
             ))}
