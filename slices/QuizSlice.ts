@@ -104,6 +104,35 @@ export const masterApi = createApi({
         body: newSkill,
       }),
     }),
+    getQuizById: builder.query<any, string>({
+      query: (quizId) => `quizsurvey/get-quiz?quizId=${quizId}`,
+    }),
+    updateQuizSurvey: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "quizsurvey/update",
+        method: "PUT",
+        body: data,
+      }),
+    }),
+
+    deleteQuizSurvey: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "quizsurvey/delete",
+        method: "DELETE",
+        body: data,
+      }),
+    }),
+    createQuizSurvey: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "quizsurvey/create",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getOneQuiz: builder.query<any, any>({
+      query: ({ id, offset, limit }) =>
+        `quiz-details/get-one-quiz?id=${id}&offset=${offset}&limit=${limit}`,
+    }),
   }),
 });
 
@@ -123,4 +152,9 @@ export const {
 
   useGetTargetSkillsQuery,
   useCreateTargetSkillMutation,
+  useGetQuizByIdQuery,
+  useUpdateQuizSurveyMutation,
+  useDeleteQuizSurveyMutation,
+  useCreateQuizSurveyMutation,
+  useGetOneQuizQuery,
 } = masterApi;

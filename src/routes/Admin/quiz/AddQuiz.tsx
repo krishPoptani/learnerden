@@ -1,10 +1,15 @@
 "use client";
 
 import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import Dropdown from "@/component/Dropdown/Dropdown";
 import clsx from "clsx";
-import { useGetBoardsQuery, useGetGradesQuery, useGetLanguagesQuery, useGetSubjectsQuery } from "../../../../slices/QuizSlice";
+import {
+  useGetBoardsQuery,
+  useGetGradesQuery,
+  useGetLanguagesQuery,
+  useGetSubjectsQuery,
+} from "../../../../slices/QuizSlice";
 import Loader from "@/component/Loader/Loader";
 type FormValues = {
   pdfFormat: string;
@@ -12,6 +17,7 @@ type FormValues = {
   board: string;
   grade: string;
   quizSubject: string;
+  quizTitle : string;
   quizTags: string;
   noOfQuiz: number;
   quizFor: string;
@@ -32,27 +38,39 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
     control,
     formState: { errors },
   } = useForm<FormValues>();
-  
+
   const { data: languages, isLoading, error } = useGetLanguagesQuery();
-  const {data :grades , isLoading : gradesLoading, error : gradeError} = useGetGradesQuery();
-  const {data :boards , isLoading : boardsLoading, error : boardError} = useGetBoardsQuery();
-  const {data :subjects , isLoading : subjectsLoading, error : subjectError} = useGetSubjectsQuery();
+  const {
+    data: grades,
+    isLoading: gradesLoading,
+    error: gradeError,
+  } = useGetGradesQuery();
+  const {
+    data: boards,
+    isLoading: boardsLoading,
+    error: boardError,
+  } = useGetBoardsQuery();
+  const {
+    data: subjects,
+    isLoading: subjectsLoading,
+    error: subjectError,
+  } = useGetSubjectsQuery();
   const languageOptions =
     languages?.data?.result?.map((lang) => ({
       label: `${lang.name} (${lang.code.toUpperCase()})`,
       value: lang.id,
     })) || [];
-    const gradeOptions =
+  const gradeOptions =
     grades?.data?.result?.map((grade) => ({
       label: `${grade.name}`,
       value: grade.id,
     })) || [];
-    const boardOptions =
+  const boardOptions =
     boards?.data?.result?.map((board) => ({
       label: `${board.name}`,
       value: board.id,
     })) || [];
-    const subjectsOptions =
+  const subjectsOptions =
     subjects?.data?.result?.map((subject) => ({
       label: `${subject.name}`,
       value: subject.id,
@@ -61,11 +79,12 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
     console.log("Form Data:", data);
   };
 
-  if(isLoading){
-    return <Loader />
-  }
+  const uploadedFile = useWatch({ control, name: "quizFile" });
+  const hasFile = uploadedFile?.length > 0;
 
-  else{
+  if (isLoading) {
+    return <Loader />;
+  } else {
     return (
       <div className="fixed inset-0 bg-white flex flex-col h-screen z-[9999]">
         {/* Sticky Header */}
@@ -85,7 +104,7 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
             Add Quiz
           </div>
         </div>
-  
+
         {/* Scrollable Form Area */}
         <div className="mt-4 flex-1 overflow-y-auto scrollbar-hide">
           <div className="w-full px-4 max-w-7xl mx-auto py-4 pt-6 shadow-md">
@@ -100,7 +119,7 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
               >
                 By Uploading File
               </div>
-  
+
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="grid w-full grid-cols-1 md:grid-cols-2 gap-6"
@@ -134,24 +153,46 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                     </p>
                   )}
                 </div>
-  
+
                 {/* File Upload Placeholder */}
+
                 <div className="col-span-2">
                   <div className="text-sm mb-2 ml-1">Describe Your Quiz</div>
+
                   <label
                     htmlFor="quizFile"
-                    className="border-dashed border-2 border-gray-300 rounded-lg p-4 flex flex-col items-center cursor-pointer"
+                    className={`border-2 rounded-lg p-4 flex flex-col items-center cursor-pointer transition-all duration-200
+      ${
+        hasFile
+          ? "border-[#4F4AB0] bg-[#F0F4FF]"
+          : "border-dashed border-gray-300"
+      }
+    `}
                   >
                     <img src={add_quiz} width={24} height={24} alt="Add Quiz" />
-                    <p className="text-sm text-[#4F4AB0]">+ Add New File</p>
-                    <p className="text-xs text-gray-400">
-                      Files Supported: PDF, Image, PPT, DOCX/DOC (max 20MB)
+                    <p
+                      className={`text-sm ${
+                        hasFile
+                          ? "text-[#4F4AB0] font-semibold"
+                          : "text-[#4F4AB0]"
+                      }`}
+                    >
+                      {hasFile ? "File Selected" : "+ Add New File"}
                     </p>
+                    <p className="text-xs text-gray-400">
+                      Files Supported: PDF(max 20MB)
+                    </p>
+                    {hasFile && (
+                      <p className="text-xs mt-1 text-gray-600">
+                        {uploadedFile[0]?.name}
+                      </p>
+                    )}
                   </label>
+
                   <input
                     type="file"
                     id="quizFile"
-                    accept=".pdf,.doc,.docx,.ppt,.pptx,.png,.jpg,.jpeg"
+                    accept=".pdf"
                     {...register("quizFile", {
                       required: "File is required",
                       validate: {
@@ -162,15 +203,14 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                     })}
                     className="hidden"
                   />
-  
-                  {/* Error Message */}
+
                   {errors.quizFile && (
                     <p className="text-red-500 text-sm mt-1">
                       {errors.quizFile.message}
                     </p>
                   )}
                 </div>
-  
+
                 {/* Quiz For */}
                 <div>
                   <label className="block text-sm mb-2">Select Quiz For</label>
@@ -207,7 +247,29 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                     </p>
                   )}
                 </div>
-  
+                  <div></div>
+                <div>
+                  <label className="block text-sm mb-2 text-[#4E4E4E]">
+                    Quiz Title <span className="text-sm text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter Quiz Tags"
+                    {...register("quizTitle", {
+                      required: "Quiz Tags are required",
+                    })}
+                    className={clsx(
+                      "w-full bg-transparent h-[50px] rounded-lg border text-sm px-3 focus:outline-none",
+                      errors.quizTitle ? "border-red-500" : "border-[#A0A0A0]"
+                    )}
+                  />
+                  {errors.quizTitle && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.quizTitle.message}
+                    </p>
+                  )}
+                </div>
+
                 {/* Board Dropdown */}
                 <div>
                   <Dropdown
@@ -223,10 +285,12 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                     error={errors.board?.message}
                   />
                   {errors.board && (
-                    <p className="text-red-500 text-sm">{errors.board.message}</p>
+                    <p className="text-red-500 text-sm">
+                      {errors.board.message}
+                    </p>
                   )}
                 </div>
-  
+
                 {/* Grade Dropdown */}
                 <div>
                   <Dropdown
@@ -242,10 +306,12 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                     error={errors.grade?.message}
                   />
                   {errors.grade && (
-                    <p className="text-red-500 text-sm">{errors.grade.message}</p>
+                    <p className="text-red-500 text-sm">
+                      {errors.grade.message}
+                    </p>
                   )}
                 </div>
-  
+
                 {/* Subject Dropdown */}
                 <div>
                   <Dropdown
@@ -266,18 +332,17 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                     </p>
                   )}
                 </div>
-  
+
                 {/* Subject Dropdown */}
                 <div>
                   <label className="block text-sm text-[#4E4E4E] mb-2">
-                    No.of.Quiz <span className="text-sm text-red-500">*</span>
+                    No.of.Quiz 
+                    {/* <span className="text-sm text-red-500">*</span> */}
                   </label>
                   <input
                     type="number"
                     placeholder="Enter No. of Quiz"
-                    {...register("noOfQuiz", {
-                      required: "No. of Quiz are required",
-                    })}
+                    {...register("noOfQuiz")}
                     className={clsx(
                       "w-full bg-transparent h-[50px] rounded-lg border text-sm px-3 focus:outline-none",
                       errors.noOfQuiz ? "border-red-500" : "border-[#A0A0A0]"
@@ -292,14 +357,13 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                 {/* Quiz Tag Input */}
                 <div>
                   <label className="block text-sm mb-2 text-[#4E4E4E]">
-                    Quiz Tagging <span className="text-sm text-red-500">*</span>
+                    Quiz Tagging 
+                    {/* <span className="text-sm text-red-500">*</span> */}
                   </label>
                   <input
                     type="text"
                     placeholder="Enter Quiz Tags"
-                    {...register("quizTags", {
-                      required: "Quiz Tags are required",
-                    })}
+                    {...register("quizTags")}
                     className={clsx(
                       "w-full bg-transparent h-[50px] rounded-lg border text-sm px-3 focus:outline-none",
                       errors.quizTags ? "border-red-500" : "border-[#A0A0A0]"
@@ -311,7 +375,7 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                     </p>
                   )}
                 </div>
-  
+
                 {/* Submit Buttons */}
                 <div className="col-span-2 flex justify-center gap-10 pt-6">
                   <button
