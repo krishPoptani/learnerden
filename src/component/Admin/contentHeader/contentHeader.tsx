@@ -1,13 +1,13 @@
-'use client';
+"use client";
 import SearchInput from "@/component/Search/Search"; // Assuming this is already reusable
 import React from "react";
 
 interface ContentHeaderProps {
   title: string;
-  query: string;
-  setQuery: (value: string) => void;
-  buttonLabel: string;
-  onButtonClick: () => void;
+  query?: string;
+  setQuery?: (value: string) => void;
+  buttonLabel?: string;
+  onButtonClick?: () => void;
   showButton?: boolean;
   showSearch?: boolean;
 }
@@ -29,8 +29,10 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
 
         {/* Right: Search + Button */}
         <div className="flex items-center gap-4">
-          {showSearch && <SearchInput value={query} onChange={setQuery} />}
-          {showButton && (
+          {showSearch && query !== undefined && setQuery && (
+            <SearchInput value={query} onChange={setQuery} />
+          )}
+          {showButton && buttonLabel && onButtonClick && (
             <button
               className="bg-[#4F4AB0] text-white px-6 py-3 border-none rounded-md hover:bg-[#3e3a92] transition-colors duration-200 whitespace-nowrap leading-tight"
               onClick={onButtonClick}

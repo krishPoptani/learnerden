@@ -20,7 +20,7 @@ export default function ViewQuizTab() {
   const totalPages = 10;
   const totalRecords = 95;
   const [modal, setModal] = useState<Boolean>(false);
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [activeTab, setActiveTab] = useState("overview");
   const tabItems = [
     { label: "Overview", value: "overview" },
     { label: "User", value: "user" },
