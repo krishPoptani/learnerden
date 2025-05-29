@@ -24,15 +24,52 @@ export const QuizUserApi = createApi({
     }),
     tagTypes: ['QuizType'],
     endpoints: (builder) => ({
-        sendEmail: builder.mutation({
-            query: (payload) => ({
-                url: "send-email",
+
+        getOneGradeQuizDetails: builder.query({
+            query: ({ offset, limit, id }) => ({
+                url: `masterService/grade/get-One-grade-QuizDetails?offset=${offset}&limit=${limit}&id=${id}`,
+                method: "GET",
+            }),
+        }),
+        quizQuestionAnswer: builder.query({
+            query: ({ attemptId }) => ({
+                url: `masterService/quiz-result/quiz?attemptId=${attemptId}`,
+                method: "GET",
+            }),
+        }),
+        postQuizAnswerQuestion: builder.mutation({
+            query: (data) => ({
+                url: `masterService/quiz-result/answer-question`,
                 method: "POST",
-                body: payload,
+                body: data
+            }),
+        }),
+        getQuizInstruction: builder.query({
+            query: ({ quizId }) => ({
+                url: `masterService/quiz-instructions/get?quizId=${quizId}`,
+                method: "GET",
+            }),
+        }),
+        postQuizStart: builder.mutation({
+            query: (data) => ({
+                url: `masterService/quiz-result/start-quiz`,
+                method: "POST",
+                body: data
+            }),
+        }),
+        postQuizEnd: builder.mutation({
+            query: (attemptId) => ({
+                url: `masterService/quiz-result/end-quiz?attemptId=${attemptId}`,
+                method: "POST"
             }),
         }),
     }),
 });
 export const {
-    useSendEmailMutation,
+    useGetOneGradeQuizDetailsQuery,
+    useQuizQuestionAnswerQuery,
+    usePostQuizAnswerQuestionMutation,
+    useGetQuizInstructionQuery,
+    usePostQuizStartMutation,
+    usePostQuizEndMutation,
 } = QuizUserApi;

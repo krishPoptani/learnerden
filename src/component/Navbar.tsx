@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux';
 import { useGetContactUsQuery } from '../../slices/contactForm';
 import { setContact } from '../../slices/contactForm';
+import { getUserInfo } from '@/utils/user.util';
 const profileIcon = '/images/profile_icon.png'
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,15 +27,18 @@ export default function Navbar() {
   }, [data, dispatch]);
   const logOut = () => {
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('login');
+      localStorage.removeItem('token');
+      localStorage.removeItem('UserInfo');
       router.push('/');
     }
   }
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  const user = getUserInfo()
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(false);
 
   useEffect(() => {
-    const loginStatus = localStorage.getItem('login');
-    setIsLoggedIn(loginStatus === 'true');
+    if (user?.id) {
+      setIsLoggedIn(true)
+    }
   }, []);
 
   if (isLoggedIn === null) return null;

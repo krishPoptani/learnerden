@@ -12,6 +12,7 @@ import { setUserInfo } from "@/utils/user.util";
 interface LoginInfo {
     email: string;
     password: string;
+    role:string
 }
 
 export async function userSignIn(info: LoginInfo, showToast = true): Promise<any> {
@@ -24,6 +25,7 @@ export async function userSignIn(info: LoginInfo, showToast = true): Promise<any
         const token = res?.data?.data?.token;
         setUserInfo(user)
         setToken(token)
+        window.location.href = '/superadmin/dashboard';
         if (showToast) {
             console.log("Login Sucessfull");
         }

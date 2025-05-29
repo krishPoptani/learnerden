@@ -8,8 +8,8 @@ const userIcon = '/assets/icons/user.svg';
 const DownIcon = '/icons/dropdown-arrow.svg';
 
 type Option = {
-  label: string;
-  value: string;
+  label: any;
+  value: any;
 };
 
 type DropdownProps = {

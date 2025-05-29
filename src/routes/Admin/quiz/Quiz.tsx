@@ -4,17 +4,22 @@ import QuizTable from '@/component/Admin/quiz/quiztable'
 import Pagination from '@/component/Pagination/pagination'
 import React, { useState } from 'react'
 import AddQuizModal from './AddQuiz'
+import { useGetQuizDetailsQuery } from '../../../../slices/admin/quizSliceAdmin'
 
 const AdminQuiz = () => {
   const [page, setPage] = useState(1);
-  const totalPages = 10;
-  const totalRecords = 95;
+  const totalPages = 1;
+  const totalRecords = 2;
   const [query, setQuery] = useState(""); 
   const [addQuizModal , setAddQuizModal]  = useState(false)
+  const {data:getQuizDetails}=useGetQuizDetailsQuery({
+    offset:'1',
+    limit:'10'
+  })
   return (
     <div className='py-2'>
-      <Quizheader query={query} setQuery={setQuery} setAddQuizModal={setAddQuizModal} />
-      <QuizTable  />
+      <Quizheader query={query} setQuery={setQuery} setAddQuizModal={setAddQuizModal}/>
+      <QuizTable   getQuizDetails={getQuizDetails} />
       <Pagination
         currentPage={page}
         totalPages={totalPages}
