@@ -7,13 +7,52 @@ import MockQuestionAnswer from "@/component/User/MockQuestionAnswer";
 import Timer from "@/component/User/Timer";
 import NavigationButtons from "@/component/User/NavigationButtons";
 import QuizResult from "@/component/User/QuizResult";
-import {useQuizQuestionAnswerQuery } from "../../../../../../../slices/user/quizSliceUser";
+import { usePostQuizEndMutation, useQuizQuestionAnswerQuery } from "../../../../../../../slices/user/quizSliceUser";
+import { useParams } from "next/navigation";
 
+interface Question {
+    questionId: string;
+    question: string;
+    options: string[];
+    correctAnswer: string;
+    reason: string;
+    number: number;
+    userAnswer: string | null;
+    type: "answered" | "not answered";
+}
+
+interface QuizQuestionAnswerResponse {
+    status: string;
+    statusCode: number;
+    data: {
+        questions: Question[];
+        timeRemaining: number;
+        correctCount: number;
+        wrongCount: number;
+        totalQuestions: number;
+        resultPercentage: number;
+        isEnded: boolean
+    };
+    error: any;
+    success: boolean;
+}
 
 const MockTest = () => {
-    const { data: quizQuestionAnswer, isLoading, isSuccess, error } =
-        useQuizQuestionAnswerQuery({ attemptId: '3f5e80ef-6e25-4b04-a6cb-14df80dd2db2' });
-    
+    const parms = useParams()
+    console.log(parms?.mocktest, "parms");
+    const {
+        data: quizQuestionAnswer,
+        isLoading,
+        isSuccess,
+        error,
+    } = useQuizQuestionAnswerQuery({ attemptId: parms?.mocktest }) as {
+        data: QuizQuestionAnswerResponse;
+        isLoading: boolean;
+        isSuccess: boolean;
+        error: unknown;
+    };
+
+
     const questions = quizQuestionAnswer?.data?.questions
     // const questions = [
     //     {
@@ -48,23 +87,47 @@ const MockTest = () => {
     const [answers, setAnswers] = useState<{ [key: number]: string }>({});
     const [reviewed, setReviewed] = useState<number[]>([]);
     const [isSubmitted, setIsSubmitted] = useState(false); // 🔥 New
-    const initialMinutes = 50;
-    const [secondsLeft, setSecondsLeft] = useState(initialMinutes * 60);
+    const [secondsLeft, setSecondsLeft] = useState<number>(1);
+    useEffect(() => {
+        if (quizQuestionAnswer?.data?.isEnded === true) {
+            setIsSubmitted(true);
+        }
+        if (typeof quizQuestionAnswer?.data?.timeRemaining === 'number') {
+            setSecondsLeft(quizQuestionAnswer.data.timeRemaining);
+        }
+    }, [quizQuestionAnswer]);
+    console.log(secondsLeft, "secondsLeft");
+
+    // Countdown effect
+    useEffect(() => {
+        if (secondsLeft === undefined || secondsLeft <= 0) return;
+
+        const timer = setInterval(() => {
+            setSecondsLeft((prev) => (prev && prev > 0 ? prev - 1 : 0));
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, [secondsLeft]);
 
     useEffect(() => {
         if (secondsLeft === 0 && !isSubmitted) {
             handleSubmit();
         }
-    }, [secondsLeft]);
-
-
+    }, [secondsLeft, isSubmitted]);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setSecondsLeft((s) => (s > 0 ? s - 1 : 0));
-        }, 1000);
-        return () => clearInterval(timer);
-    }, []);
+        if (isSuccess && quizQuestionAnswer?.data?.questions) {
+            const initialAnswers: { [key: number]: string } = {};
+
+            quizQuestionAnswer?.data?.questions?.forEach((q, index) => {
+                if (q.userAnswer) {
+                    initialAnswers[index] = q.userAnswer;
+                }
+            });
+
+            setAnswers(initialAnswers);
+        }
+    }, [isSuccess, quizQuestionAnswer]);
 
     const handleAnswer = (option: string) => {
         setAnswers({ ...answers, [currentQuestion]: option });
@@ -89,8 +152,9 @@ const MockTest = () => {
             setCurrentQuestion(currentQuestion - 1);
         }
     };
-
+    const [postQuizEnd] = usePostQuizEndMutation()
     const handleSubmit = () => {
+        postQuizEnd(parms?.mocktest)
         setIsSubmitted(true); // 🔥 End quiz and show result
     };
 
@@ -98,7 +162,7 @@ const MockTest = () => {
     if (isSubmitted) {
         const score = Object.keys(answers).length;
         return (
-            <QuizResult />
+            <QuizResult quizQuestionAnswer={quizQuestionAnswer} />
         );
     }
     if (isLoading) return <p>Loading...</p>;

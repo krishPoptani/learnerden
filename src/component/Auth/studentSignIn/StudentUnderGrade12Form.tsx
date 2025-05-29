@@ -136,7 +136,6 @@ export default function StudentUnderGrade12Form({setGrade}:Props) {
                 </button>
                 <button
                     type="submit"
-                
                     className="w-[40%] py-3 bg-[#4A3AFF] text-white rounded-full mt-4 hover:bg-[#4c32c4]"
                 >
                     Create Account

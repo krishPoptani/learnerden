@@ -12,6 +12,7 @@ import { setUserInfo } from "@/utils/user.util";
 interface LoginInfo {
     email: string;
     password: string;
+    role:string
 }
 
 export async function userSignIn(info: LoginInfo, showToast = true): Promise<any> {

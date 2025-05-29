@@ -1,3 +1,4 @@
+import { hostUrl } from "@/utils/baseUrl";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface Language {
@@ -42,7 +43,7 @@ interface ApiResponse<T> {
 export const masterApi = createApi({
   reducerPath: "masterApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:8000/api/v1/masterService/",
+    baseUrl: `${hostUrl}/masterService/`,
   }),
   endpoints: (builder) => ({
     // Languages

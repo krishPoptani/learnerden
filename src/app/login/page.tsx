@@ -10,17 +10,18 @@ export default function Login() {
   const router = useRouter()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role,setRole]=useState('super_admin')
 
   const loginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await userSignIn({ email, password });
+      await userSignIn({ email, password,role });
       console.log('Login success!');
     } catch (err) {
       console.log('Login failed:', err);
     }
   };
-
+  const [adminLogin, setAdminLogin] = useState<boolean>(false)
   return (
     <UserDashboard>
 
@@ -52,6 +53,7 @@ export default function Login() {
               </h2>
 
               {/* Tabs */}
+              {!adminLogin&&(
               <div className="flex justify-center mb-6 rounded-full bg-[#E4E1FF] w-fit mx-auto p-2">
                 <button
                   className={`px-6 py-2 rounded-full text-sm font-medium ${activeTab === 'student' ? 'bg-[#5F3FF8] text-white' : ''}`}
@@ -66,6 +68,7 @@ export default function Login() {
                   Tutors
                 </button>
               </div>
+              )}
 
               {/* Form */}
               <form className="space-y-4" onSubmit={loginSubmit}>
@@ -115,9 +118,9 @@ export default function Login() {
           </div>
         </div>
         <div className="mt-10 flex justify-center gap-7 text-xs text-gray-500 absolute left-10 bottom-10">
-          <a href="#" className="hover:underline">Admin Login</a>
-          <a href="#" className="hover:underline">Privacy Policy</a>
-          <a href="#" className="hover:underline">Terms and Conditions</a>
+          <span onClick={() => setAdminLogin(true)} className="hover:underline">Admin Login</span>
+          <span className="hover:underline">Privacy Policy</span>
+          <span className="hover:underline">Terms and Conditions</span>
         </div>
       </div>
     </UserDashboard>

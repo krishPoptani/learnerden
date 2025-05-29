@@ -58,11 +58,11 @@ const SignUp = () => {
                         </div>
                     </div>
                 </div>
-                <div className="mt-10 flex justify-center gap-7 text-xs text-gray-500 absolute left-10 bottom-10">
+                {/* <div className="mt-10 flex justify-center gap-7 text-xs text-gray-500 absolute left-10 bottom-10">
                     <a href="#" className="hover:underline">Admin Login</a>
                     <a href="#" className="hover:underline">Privacy Policy</a>
                     <a href="#" className="hover:underline">Terms and Conditions</a>
-                </div>
+                </div> */}
             </div>
         </UserDashboard>
     );
