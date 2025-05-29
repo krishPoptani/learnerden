@@ -5,6 +5,7 @@ import Pagination from '@/component/User/pagination';
 import UserDashboard from '@/routes/userside/page';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
+import { useGetOneUserViewQuizDetailsQuery } from '../../../../../slices/user/quizSliceUser';
 const questionIcon = '/icons/question.svg';
 const bookIcon = '/icons/book.svg';
 const clockIcon = '/icons/clock.svg';
@@ -26,7 +27,12 @@ export default function QuizPage() {
     // const [searchParams] = useSearchParams();
     // const page = parseInt(searchParams.get('page') || '1', 10);
     const searchParams = useSearchParams();
-
+    
+    const { data: getOneUserViewQuizDetails } = useGetOneUserViewQuizDetailsQuery({
+        id: params?.subject
+    })
+    console.log(getOneUserViewQuizDetails,"getOneUserViewQuizDetails");
+    
     // ✅ Correct usage - no destructuring!
     const page = parseInt(searchParams.get('page') || '1', 10);
     const totalPages = 10; // example, can be dynamic

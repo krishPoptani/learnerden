@@ -63,6 +63,12 @@ export const QuizUserApi = createApi({
                 method: "POST"
             }),
         }),
+        getOneUserViewQuizDetails: builder.query({
+            query: ({ id }) => ({
+                url: `masterService/quiz-details/get-oneUserView-QuizDetails?id=${id}`,
+                method: "GET",
+            }),
+        }),
     }),
 });
 export const {
@@ -72,4 +78,5 @@ export const {
     useGetQuizInstructionQuery,
     usePostQuizStartMutation,
     usePostQuizEndMutation,
+    useGetOneUserViewQuizDetailsQuery,
 } = QuizUserApi;

@@ -10,7 +10,7 @@ export default function Login() {
   const router = useRouter()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role,setRole]=useState('super_admin')
+  const [role,setRole]=useState('superadmin')
 
   const loginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

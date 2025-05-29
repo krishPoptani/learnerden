@@ -50,7 +50,7 @@ export default function MockTestPage() {
       {/* <div className="container max-w-7xl mx-auto py-7"> */}
       <div className="container mx-auto px-4 py-7 max-w-7xl">
         <h1 className="text-2xl sm:text-4xl font-bold text-secondary text-center mb-3 sm:mb-4">
-          {grade}
+          {getQuizInstruction?.data?.gradeName}
         </h1>
         <p className='text-center text-[#717171] text-sm sm:text-base'>
           Explore fun and interactive quizzes across various topics.
@@ -58,7 +58,7 @@ export default function MockTestPage() {
         <div className="">
           <div className='flex justify-between items-center my-3 border-b border-dashed pb-5'>
             <h2 className="text-xl sm:text-2xl text-[#2E2E48] font-semibold">
-              {getQuizInstruction?.data?.subjectName}
+              {getQuizInstruction?.data?.quizTopic}
             </h2>
             <button onClick={() => handleTakeTestClick()} className='bg-[#4A3AFF] text-white px-5 py-2 rounded-full'>Take into test</button>
           </div>
@@ -76,20 +76,21 @@ export default function MockTestPage() {
               30 minutes
             </span>
             <span className='text-secondary flex items-center gap-2'>
-              Created By:
-              <img className='w-[35px] sm:w-[50px]' src={healthiqIcon} alt='healthiq' />
+              Created By:  <span className='text-black'>Admin</span>
+              {/* <img className='w-[35px] sm:w-[50px]' src={healthiqIcon} alt='healthiq' /> */}
             </span>
             <span className='text-secondary flex items-center gap-2'>
               <img className='w-4 sm:w-[17px]' src={verifiedIcon} alt='verifiedIcon' />
               Verified By:
-              <span className='text-black'>Mukesh Sethi</span>
+              <span className='text-black'>Admin</span>
             </span>
           </div>
         </div>
-        <div className='flex flex-col lg:flex-row justify-between items-start gap-8'>
+        {/* <div className='grid grid-col lg:grid-row justify-between items-start gap-8'> */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.7fr_0.3fr] justify-between items-start gap-8">
           <div>
             <p className="text-[#626279] text-sm sm:text-base font-normal mb-4 sm:mb-6 leading-relaxed">
-              This quiz assesses your understanding of fundamental algebraic concepts, including linear and quadratic equations, inequalities, polynomials, and rational expressions. You will also encounter problems related to functions, their properties, transformations, and graphical representations. Mastering these topics is essential for solving complex mathematical problems and building a strong foundation for advanced studies. Questions will test your problem-solving abilities, critical thinking, and application of algebraic principles. Whether you're reviewing for an exam or reinforcing your skills, this quiz is designed to challenge and enhance your mathematical proficiency. Prepare to tackle equations, analyze functions, and improve your algebraic fluency!
+              {getQuizInstruction?.data?.quizDescription}
             </p>
 
             <h4 className="text-xl font-semibold mb-2 text-[#2E2E48]">Instruction</h4>
