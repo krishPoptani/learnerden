@@ -134,6 +134,30 @@ export const masterApi = createApi({
       query: ({ id, offset, limit }) =>
         `quiz-details/get-one-quiz?id=${id}&offset=${offset}&limit=${limit}`,
     }),
+    createQuizInstructions: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "quiz-instructions/create",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    getQuizInstruction: builder.query<any, any>({
+      query: ({ quizId }) => `/quiz-instructions/get?quizId=${quizId}`,
+    }),
+    createQuiz: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "quiz-details/create",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    createQuizQuestions: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "quizsurvey/createbulk",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -158,4 +182,8 @@ export const {
   useDeleteQuizSurveyMutation,
   useCreateQuizSurveyMutation,
   useGetOneQuizQuery,
+  useGetQuizInstructionQuery,
+  useCreateQuizInstructionsMutation,
+  useCreateQuizMutation,
+  useCreateQuizQuestionsMutation,
 } = masterApi;

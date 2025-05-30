@@ -1,16 +1,20 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler, useWatch } from "react-hook-form";
 import Dropdown from "@/component/Dropdown/Dropdown";
 import clsx from "clsx";
 import {
+  useCreateQuizMutation,
+  useCreateQuizQuestionsMutation,
   useGetBoardsQuery,
   useGetGradesQuery,
   useGetLanguagesQuery,
+  useGetOneQuizQuery,
   useGetSubjectsQuery,
 } from "../../../../slices/QuizSlice";
 import Loader from "@/component/Loader/Loader";
+import axios from "axios";
 type FormValues = {
   pdfFormat: string;
   subject: string;
@@ -23,23 +27,30 @@ type FormValues = {
   quizFor: string;
   quizFile: FileList;
 };
-
 interface AddQuizModalProps {
   setAddQuizModal: (value: boolean) => void;
+  // quizId?: string; // optional for prefill
 }
+
 
 const backBtn = `/icons/backbtn.svg`;
 const add_quiz = `/icons/add_quizfolder.png`;
 
-export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
+export default function AddQuizModal({ setAddQuizModal, 
+  // quizId 
+}: AddQuizModalProps) {
   const {
     handleSubmit,
     register,
     control,
+    reset,
     formState: { errors },
   } = useForm<FormValues>();
 
   const { data: languages, isLoading, error } = useGetLanguagesQuery();
+  const [createQuiz, { isLoading: isCreating }] = useCreateQuizMutation();
+  const [createQuizQuestions, {isLoading : creatingQuestions}] = useCreateQuizQuestionsMutation()
+
   const {
     data: grades,
     isLoading: gradesLoading,
@@ -75,9 +86,93 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
       label: `${subject.name}`,
       value: subject.id,
     })) || [];
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log("Form Data:", data);
-  };
+    // const {
+    //   data: quizData,
+    //   isSuccess: quizLoaded,
+    // } = useGetOneQuizQuery(
+    //   { id: quizId, offset: 1, limit: 10 },
+    //   { skip: !quizId }
+    // );
+    
+
+
+    const onSubmit: SubmitHandler<FormValues> = async (data) => {
+      const formData = new FormData();
+    
+      if (data.quizFile?.[0]) {
+        formData.append("files", data.quizFile[0]);
+      } else {
+        console.error("No file selected.");
+        return;
+      }
+    
+      try {
+        // 1. Upload the file
+        const uploadRes = await axios.post(
+          "https://node.aieducationpro.com/api/v1/aiService/quiz/generate",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+    
+        const fileUploadData = uploadRes?.data?.results?.data;
+        console.log("Upload success:", fileUploadData);
+    
+        // 2. Prepare and send quiz creation data
+        const quizPayload = {
+          quizLanguage: "b26a1c05-96f2-4671-9f40-9954445fe2bd",
+          topic: data.quizTitle || "Untitled Quiz",
+          userId: "587fe642-5e6a-4944-8e4c-9da37ec9fb9c", // You can update to dynamic if needed
+          quizType: "93bd1ddc-8d93-4643-92a2-ab17d4345483",
+          quizCreationType: "AI",
+          boardType: data.board || "93bd1ddc-8d93-4643-92a2-ab17d4345483",
+          grade: data.grade || "113662b8-ac00-4eec-a6b9-90d424e1d7ce",
+          subject: data.subject || "3dae1de6-f67c-4629-9ef3-5fe989f50973",
+          targetSkill: "62783de4-1b4c-4186-bf1d-fa927312243e",
+          quizReason: "Test",
+          totalQuiz: data.noOfQuiz || 4,
+          quizLevel: "1",
+          quizTag: data.quizTags || "Medical",
+          description: "Test Description",
+        };
+    
+        const createRes = await createQuiz(quizPayload).unwrap();
+        console.log("Quiz created successfully:", createRes);
+    
+        // Optional: close modal or show success message
+        // setAddQuizModal(false);
+      } catch (error) {
+        console.error("Error creating quiz:", error);
+      }
+    };
+    
+    
+  // useEffect(() => {
+  //   if (quizLoaded && quizData?.data?.result && quizData.data?.result?.[0]) {
+  //     const quiz = quizData.data?.result?.[0];
+  //     reset({
+  //       pdfFormat: quiz.quizCreationType?.toLowerCase() || "extract",
+  //       subject: quiz.subject,
+  //       board: quiz.boardType,
+  //       grade: quiz.grade,
+  //       quizTitle: quiz.topic || "",
+  //       quizTags: quiz.quizTag || "",
+  //       noOfQuiz: quiz.totalQuiz,
+  //       quizFor: getQuizForFromReason(quiz.quizReason),
+  //     });
+  //   }
+  // }, [quizLoaded, quizData, reset]);
+
+  // // utility to map quizReason back to your `quizFor` radio
+  // const getQuizForFromReason = (reason: string) => {
+  //   if (reason === "Test") return "syllabus";
+  //   if (reason === "Competitive") return "competitive";
+  //   if (reason === "Language") return "language";
+  //   return "syllabus"; // default
+  // };
 
   const uploadedFile = useWatch({ control, name: "quizFile" });
   const hasFile = uploadedFile?.length > 0;
@@ -254,9 +349,9 @@ export default function AddQuizModal({ setAddQuizModal }: AddQuizModalProps) {
                   </label>
                   <input
                     type="text"
-                    placeholder="Enter Quiz Tags"
+                    placeholder="Enter Quiz Title"
                     {...register("quizTitle", {
-                      required: "Quiz Tags are required",
+                      required: "Quiz Title are required",
                     })}
                     className={clsx(
                       "w-full bg-transparent h-[50px] rounded-lg border text-sm px-3 focus:outline-none",

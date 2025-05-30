@@ -26,7 +26,9 @@ const AdminQuiz = () => {
         onPageChange={(newPage) => setPage(newPage)}
         totalRecords={totalRecords}
       />
-      {addQuizModal && <AddQuizModal setAddQuizModal={setAddQuizModal}/>}
+      {addQuizModal && <AddQuizModal setAddQuizModal={setAddQuizModal}
+      //  quizId='e329ac7f-68e2-4e7a-a5e8-2c7c5409c7f4'
+       />}
     </div>
   )
 }
