@@ -23,7 +23,7 @@ interface QuizDetail {
 }
 
 interface GradeQuizItem {
-  id:string;
+  id: string;
   name: string;
   quizDetails: QuizDetail[];
 }
@@ -35,6 +35,7 @@ export default function QuizPage() {
   const handleGradeClick = (value: string) => {
     router.push(`/quiz/${grade}/${value}`);
   };
+  console.log(params, "params");
 
   // Populate state from URL or use default
   const [subject, setSubject] = useState(searchParams.get('subject') || 'Mathematics');
@@ -55,11 +56,11 @@ export default function QuizPage() {
 
   const { data: getOneGradeQuizDetails } = useGetOneGradeQuizDetailsQuery({
     offset: '1',
-    limit: '10',
-    id: 'e03548ee-c7f8-40db-bf8d-746af24db355'
+    limit: '20',
+    id: params?.grade
   })
-  console.log(getOneGradeQuizDetails,"getOneGradeQuizDetails");
-  
+  console.log(getOneGradeQuizDetails, "getOneGradeQuizDetails");
+
   const subjectData: {
     title: string,
     grade: string,
@@ -112,14 +113,15 @@ export default function QuizPage() {
     <UserDashboard>
       <div className="container max-w-7xl mx-auto py-7">
         <h1 className="text-4xl font-bold text-secondary text-center mb-4">
-          {grade}
+          {getOneGradeQuizDetails?.data?.result?.[0]?.name}
         </h1>
         <p className='text-center text-[#717171]'>Explore fun and interactive quizzes across various topics.</p>
 
         {/* Filter Box */}
         <div className="bg-white border border-[#D9D9D9] p-5 rounded-xl shadow my-8">
           <p className='text-[#34364A] font-medium mb-3'>Filter By:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4"> */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
             <div className='grid'>
               <label className='text-[#4E4E4E] text-sm mb-2'>Subject</label>
               <select className="border text-[#4E4E4E] text-sm p-2 rounded-xl" value={subject} onChange={(e) => setSubject(e.target.value)}>
@@ -135,7 +137,7 @@ export default function QuizPage() {
                 <option>ICSE</option>
               </select>
             </div>
-            <div className='grid'>
+            {/* <div className='grid'>
               <label className='text-[#4E4E4E] text-sm mb-2'>Grade</label>
               <select className="border text-[#4E4E4E] text-sm p-2 rounded-xl" value={gradeLevel} onChange={(e) => setGradeLevel(e.target.value)}>
                 <option>Grade 1</option>
@@ -148,7 +150,7 @@ export default function QuizPage() {
                 <option>Newest</option>
                 <option>Oldest</option>
               </select>
-            </div>
+            </div> */}
             <button
               onClick={handleSearch}
               className="mt-4 py-2 bg-[#4A3AFF] font-semibold rounded-full text-white hover:bg-blue-700"
@@ -159,7 +161,7 @@ export default function QuizPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {getOneGradeQuizDetails?.data?.result?.map((value:GradeQuizItem, i:number) => (
+          {getOneGradeQuizDetails?.data?.result?.map((value: GradeQuizItem, i: number) => (
             <div key={i} className="p-3 sm:p-4 border border-[#D9D9D9] rounded-xl shadow cursor-pointer">
               <h2
                 className="text-[#2E2E48] text-sm sm:text-base font-medium mb-2"

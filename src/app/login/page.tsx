@@ -6,16 +6,14 @@ import React, { useState } from 'react';
 const LoginImgIcon = '/icons/login_img.svg'
 
 export default function Login() {
-  const [activeTab, setActiveTab] = useState<'student' | 'tutor'>('student');
+  const [role, setRole] = useState<'student' | 'tutor' | 'superadmin'>('student');
   const router = useRouter()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role,setRole]=useState('superadmin')
-
   const loginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await userSignIn({ email, password,role });
+      await userSignIn({ email, password, role });
       console.log('Login success!');
     } catch (err) {
       console.log('Login failed:', err);
@@ -53,21 +51,21 @@ export default function Login() {
               </h2>
 
               {/* Tabs */}
-              {!adminLogin&&(
-              <div className="flex justify-center mb-6 rounded-full bg-[#E4E1FF] w-fit mx-auto p-2">
-                <button
-                  className={`px-6 py-2 rounded-full text-sm font-medium ${activeTab === 'student' ? 'bg-[#5F3FF8] text-white' : ''}`}
-                  onClick={() => setActiveTab('student')}
-                >
-                  Students
-                </button>
-                <button
-                  className={`px-6 py-2 rounded-full text-sm font-medium ml-2 ${activeTab === 'tutor' ? 'bg-[#5F3FF8] text-white' : ''}`}
-                  onClick={() => setActiveTab('tutor')}
-                >
-                  Tutors
-                </button>
-              </div>
+              {!adminLogin && (
+                <div className="flex justify-center mb-6 rounded-full bg-[#E4E1FF] w-fit mx-auto p-2">
+                  <button
+                    className={`px-6 py-2 rounded-full text-sm font-medium ${role === 'student' ? 'bg-[#5F3FF8] text-white' : ''}`}
+                    onClick={() => setRole('student')}
+                  >
+                    Students
+                  </button>
+                  <button
+                    className={`px-6 py-2 rounded-full text-sm font-medium ml-2 ${role === 'tutor' ? 'bg-[#5F3FF8] text-white' : ''}`}
+                    onClick={() => setRole('tutor')}
+                  >
+                    Tutors
+                  </button>
+                </div>
               )}
 
               {/* Form */}
@@ -118,7 +116,7 @@ export default function Login() {
           </div>
         </div>
         <div className="mt-10 flex justify-center gap-7 text-xs text-gray-500 absolute left-10 bottom-10">
-          <span onClick={() => setAdminLogin(true)} className="hover:underline">Admin Login</span>
+          <span onClick={() => { setRole('superadmin'), setAdminLogin(true) }} className="hover:underline">Admin Login</span>
           <span className="hover:underline">Privacy Policy</span>
           <span className="hover:underline">Terms and Conditions</span>
         </div>
