@@ -14,17 +14,21 @@ import { useGetOneGradeQuizDetailsQuery } from '../../../../slices/user/quizSlic
 interface SubjectDetail {
   name: string;
 }
+interface gradeBoardsDetail {
+  name: string;
+}
 
 interface QuizDetail {
   id: string;
   topic: string;
   totalQuiz: number;
+  gradeBoards:gradeBoardsDetail
   subjectDetails: SubjectDetail;
 }
 
 interface GradeQuizItem {
-  id: string;
-  name: string;
+  // id: string;
+  // name: string;
   quizDetails: QuizDetail[];
 }
 export default function QuizPage() {
@@ -161,27 +165,27 @@ export default function QuizPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {getOneGradeQuizDetails?.data?.result?.map((value: GradeQuizItem, i: number) => (
+          {getOneGradeQuizDetails?.data?.result?.[0]?.quizDetails?.map((value: QuizDetail, i: number) => (
             <div key={i} className="p-3 sm:p-4 border border-[#D9D9D9] rounded-xl shadow cursor-pointer">
               <h2
                 className="text-[#2E2E48] text-sm sm:text-base font-medium mb-2"
-                onClick={() => handleGradeClick(value?.quizDetails?.[0]?.id)}
+                onClick={() => handleGradeClick(value?.id)}
               >
-                {value?.quizDetails?.[0]?.topic}
+                {value?.topic}
               </h2>
 
               <div className='grid grid-cols-2 md:grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-y-2 py-1 border-b border-dashed mb-2'>
                 <div className='flex items-center gap-1 sm:gap-2'>
                   <img className='w-4 sm:w-5' src={gradeIcon} alt='gradeIcon' />
-                  <span className='text-xs sm:text-sm text-[#595959]'>{value?.name}</span>
+                  <span className='text-xs sm:text-sm text-[#595959]'>{value?.gradeBoards?.name}</span>
                 </div>
                 <div className='flex items-center gap-1 sm:gap-2'>
                   <img className='w-4 sm:w-5' src={bookIcon} alt='book' />
-                  <span className='text-xs sm:text-sm text-[#595959]'>{value?.quizDetails?.[0]?.subjectDetails?.name}</span>
+                  <span className='text-xs sm:text-sm text-[#595959]'>{value?.subjectDetails?.name}</span>
                 </div>
                 <div className='flex items-center gap-1 sm:gap-2'>
                   <img className='w-4 sm:w-5' src={questionIcon} alt='questionIcon' />
-                  <span className='text-xs sm:text-sm text-[#595959]'>{value?.quizDetails?.[0]?.totalQuiz} Questions</span>
+                  <span className='text-xs sm:text-sm text-[#595959]'>{value?.totalQuiz} Questions</span>
                 </div>
                 <div className='flex items-center gap-1 sm:gap-2'>
                   <img className='w-4 sm:w-5' src={clockIcon} alt='clockIcon' />
@@ -202,7 +206,7 @@ export default function QuizPage() {
                 <div className="flex gap-2 ">
                   <button className="text-blue-600 text-xs sm:text-sm ">Download as PDF</button>
                   <button
-                    onClick={() => handleMockTestClick(value?.quizDetails?.[0]?.id)}
+                    onClick={() => handleMockTestClick(value?.id)}
                     className="px-3 sm:px-4 py-1 text-xs sm:text-sm bg-blue-600 text-white rounded-full"
                   >
                     Take as Mock Test

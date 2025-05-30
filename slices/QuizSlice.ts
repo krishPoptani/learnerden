@@ -45,6 +45,7 @@ export const masterApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${hostUrl}/masterService/`,
   }),
+  tagTypes: ['CourseType'],
   endpoints: (builder) => ({
     // Languages
     getLanguages: builder.query<ApiResponse<Language>, void>({
@@ -144,12 +145,20 @@ export const masterApi = createApi({
     getQuizInstruction: builder.query<any, any>({
       query: ({ quizId }) => `/quiz-instructions/get?quizId=${quizId}`,
     }),
+    getQuizDetails: builder.query({
+      query: ({ offset, limit, id }) => ({
+        url: `quiz-details/get?offset=${offset}&limit=${limit}`,
+        method: "GET",
+      }),
+      providesTags: (result) => [{ type: 'CourseType', id: 'LIST' }],
+    }),
     createQuiz: builder.mutation<any, any>({
       query: (data) => ({
         url: "quiz-details/create",
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ['CourseType'],
     }),
     createQuizQuestions: builder.mutation<any, any>({
       query: (data) => ({
@@ -186,4 +195,5 @@ export const {
   useCreateQuizInstructionsMutation,
   useCreateQuizMutation,
   useCreateQuizQuestionsMutation,
+  useGetQuizDetailsQuery
 } = masterApi;

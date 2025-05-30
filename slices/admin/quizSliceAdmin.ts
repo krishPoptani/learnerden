@@ -24,14 +24,9 @@ export const QuizAdminApi = createApi({
     }),
     tagTypes: ['QuizType'],
     endpoints: (builder) => ({
-       getQuizDetails: builder.query({
-            query: ({ offset,limit,id }) => ({
-                url: `masterService/quiz-details/get?offset=${offset}&limit=${limit}`,
-                method: "GET",
-            }),
-        }),
+      
     }),
 });
 export const {
-   useGetQuizDetailsQuery,
+
 } = QuizAdminApi;
