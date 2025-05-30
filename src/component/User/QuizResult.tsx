@@ -181,14 +181,14 @@ export default function QuizResult({ quizQuestionAnswer }: { quizQuestionAnswer:
         </div>
 
         {/* Footer Buttons */}
-        <div className="flex justify-center gap-6 mt-8">
+        {/* <div className="flex justify-center gap-6 mt-8">
           <button className="border border-f4a text-f4a px-5 py-2 rounded-full hover:bg-purple-50">
             Explore More Quizzes
           </button>
           <button className="bg-gradient-to-r from-[#3E4FBB] to-[#C32E6B] text-white px-5 py-2 rounded-full">
             Retake Quiz
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

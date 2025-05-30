@@ -1,13 +1,30 @@
+import { userSingUp } from "@/lib/authfunction";
 import { log } from "node:console";
 import { useState } from "react";
 
 interface Props {
     setGrade: React.Dispatch<React.SetStateAction<boolean>>;
 }
+// Inside the component file
+interface InternalFormData {
+    parentFirstName: string;
+    parentLastName: string;
+    parentEmail: string;
+    parentPhone: string;
+    parentPassword: string;
+    parentConfirmPassword: string;
+    studentFirstName: string;
+    studentLastName: string;
+    studentEmail: string;
+    syllabus: string;
+    studentGrade: string;
+    studentPassword: string;
+    isAboveSchool: boolean;
+}
 
 export default function StudentUnderGrade12Form({ setGrade }: Props) {
     const [parentstudent, setParentStudent] = useState<string>('parent');
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<InternalFormData>({
         parentFirstName: '',
         parentLastName: '',
         parentEmail: '',
@@ -20,8 +37,9 @@ export default function StudentUnderGrade12Form({ setGrade }: Props) {
         syllabus: '',
         studentGrade: '',
         studentPassword: '',
-        under12: true,
+        isAboveSchool: true,
     });
+
     console.log(formData, "formData");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,8 +47,40 @@ export default function StudentUnderGrade12Form({ setGrade }: Props) {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleSubmit = async () => {
+        const payload = {
+            parentFirstName: formData.parentFirstName,
+            parentLastName: formData.parentLastName,
+            parentEmail: formData.parentEmail,
+            parentPhone: formData.parentPhone,
+            parentPassword: formData.parentPassword,
+            parentConfirmPassword: formData.parentConfirmPassword,
+            students: [
+                {
+                    studentFirstName: formData.studentFirstName,
+                    studentLastName: formData.studentLastName,
+                    studentEmail: formData.studentEmail,
+                    syllabus: formData.syllabus,
+                    studentGrade: formData.studentGrade,
+                    studentPassword: formData.studentPassword,
+                    isAboveSchool: true
+                }
+            ]
+        };
+
+        try {
+            await userSingUp(payload);
+            console.log('Signup success!');
+            window.location.href = '/login'
+        } catch (err) {
+            console.error('Signup failed:', err);
+        }
+        window.location.href = '/login'
+
+    };
+
     return (
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
             {parentstudent === 'parent' ? (
                 <>
                     <div className="flex justify-between">

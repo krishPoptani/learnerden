@@ -12,8 +12,27 @@ import { setUserInfo } from "@/utils/user.util";
 interface LoginInfo {
     email: string;
     password: string;
-    role:string
+    role: string
 }
+// Fix SignUpInfo interface
+export interface SignUpInfo {
+    parentFirstName: string;
+    parentLastName: string;
+    parentEmail: string;
+    parentPhone: string;
+    parentPassword: string;
+    parentConfirmPassword: string;
+    students: {
+        studentFirstName: string;
+        studentLastName: string;
+        studentEmail: string;
+        syllabus: string;
+        studentGrade: string;
+        studentPassword: string;
+        isAboveSchool: boolean;
+    }[];
+}
+
 
 export async function userSignIn(info: LoginInfo, showToast = true): Promise<any> {
     const oneDay = 24 * 60 * 60 * 1000;
@@ -25,7 +44,11 @@ export async function userSignIn(info: LoginInfo, showToast = true): Promise<any
         const token = res?.data?.data?.token;
         setUserInfo(user)
         setToken(token)
-        window.location.href = '/superadmin/dashboard';
+        if (res?.data?.data?.user?.role?.name == 'superadmin') {
+            window.location.href = '/superadmin/dashboard';
+        } else {
+            window.location.href = '/quiz';
+        }
         if (showToast) {
             console.log("Login Sucessfull");
         }
@@ -37,4 +60,15 @@ export async function userSignIn(info: LoginInfo, showToast = true): Promise<any
         }
         throw error;
     }
+}
+export function userSingUp(info: SignUpInfo, showToast = true): Promise<any> {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const res = await ApiPostNoAuth('/userService/user/parent-register', info);
+            resolve(res);
+        } catch (error) {
+            console.error('Signup error', error);
+            reject(error);
+        }
+    });
 }
