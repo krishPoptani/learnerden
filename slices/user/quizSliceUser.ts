@@ -36,6 +36,7 @@ export const QuizUserApi = createApi({
                 url: `masterService/quiz-result/quiz?attemptId=${attemptId}`,
                 method: "GET",
             }),
+            providesTags: (result) => [{ type: 'QuizType', id: 'LIST' }],
         }),
         postQuizAnswerQuestion: builder.mutation({
             query: (data) => ({
@@ -62,6 +63,8 @@ export const QuizUserApi = createApi({
                 url: `masterService/quiz-result/end-quiz?attemptId=${attemptId}`,
                 method: "POST"
             }),
+            invalidatesTags: ['QuizType'],
+
         }),
         getOneUserViewQuizDetails: builder.query({
             query: ({ id }) => ({

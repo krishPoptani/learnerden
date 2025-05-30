@@ -337,18 +337,18 @@ export default function AddQuizModal({ setAddQuizModal,
 
       const createRes = await createQuiz(quizPayload).unwrap();
       // 2.Extract API from AI services 
-      // const uploadRes = await axios.post(
-      //   "https://node.aieducationpro.com/api/v1/aiService/quiz/generate",
-      //   formData,
-      //   {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   }
-      // );
+      const uploadRes = await axios.post(
+        "https://node.aieducationpro.com/api/v1/aiService/quiz/generate",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      // const fileUploadData = uploadRes?.data?.results?.data;
-      // console.log("Upload success:", fileUploadData);
+      const fileUploadData = uploadRes?.data?.results?.data;
+      console.log("Upload success:", fileUploadData);
 
       // 2. Prepare and send quiz creation data
       console.log("Quiz created successfully:", createRes);

@@ -57,7 +57,7 @@ export default function ViewQuizTab() {
         </div>
         {activeTab === "overview" && (
           <>
-            <QuizInfoCard />
+            {/* <QuizInfoCard /> */}
             <div className="max-w-7xl flex flex-col shadow-xl gap-6 rounded-xl">
               <ViewQuestionStatWrapper />
               <div className="pb-2">
