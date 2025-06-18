@@ -8,7 +8,7 @@
 import { setToken } from "@/utils/auth.util";
 import { ApiPostNoAuth } from "../api";
 import { setUserInfo } from "@/utils/user.util";
-
+import Cookies from 'js-cookie';
 interface LoginInfo {
     email: string;
     password: string;
@@ -42,8 +42,11 @@ export async function userSignIn(info: LoginInfo, showToast = true): Promise<any
         const res = await ApiPostNoAuth('/userService/user/login', info);
         const user = res?.data?.data?.user;
         const token = res?.data?.data?.token;
+        const role = user?.role?.name;
         setUserInfo(user)
         setToken(token)
+        Cookies.set('token', token, { expires: 30 }); // expires in 30 days
+        Cookies.set('role', role, { expires: 30 });
         if (res?.data?.data?.user?.role?.name == 'superadmin') {
             window.location.href = '/superadmin/dashboard';
         } else {

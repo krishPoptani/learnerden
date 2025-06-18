@@ -4,14 +4,14 @@ import QuizTable from '@/component/Admin/quiz/quiztable'
 import Pagination from '@/component/Pagination/pagination'
 import React, { useState } from 'react'
 import AddQuizModal from './AddQuiz'
-import { useGetQuizDetailsQuery } from '../../../../slices/QuizSlice'
+import { useGetQuizDetailsQuery } from '../../../../slices/admin/QuizSlice'
 
 const AdminQuiz = () => {
+  const [page, setPage] = useState(1);
   const { data: getQuizDetails } = useGetQuizDetailsQuery({
-    offset: '1',
+    offset: page,
     limit: '10'
   })
-  const [page, setPage] = useState(1);
 
   const [query, setQuery] = useState("");
   const [addQuizModal, setAddQuizModal] = useState(false)

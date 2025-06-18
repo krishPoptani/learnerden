@@ -73,7 +73,7 @@ export default function QuizResult({ quizQuestionAnswer }: { quizQuestionAnswer:
         <div className="bg-f4a text-2xl text-white">
           <div className="max-w-7xl mx-auto flex justify-between py-5">
             <h2>Global Learner Den</h2>
-            <a href="http://localhost:5000/quiz/Grade%201%20-%205%20(Primary%20School)/Trigonometry%20and%20Geometry%20Quiz/mock/">X</a>
+            <a href="http://localhost:5000/quiz/e03548ee-c7f8-40db-bf8d-746af24db355">X</a>
           </div>
         </div>
         <div className="max-w-7xl mx-auto py-5 bg-white">

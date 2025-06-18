@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { PlusCircle, MinusCircle } from "lucide-react";
-import { useCreateQuizInstructionsMutation, useGetQuizInstructionQuery } from "../../../../slices/QuizSlice";
+import { useCreateQuizInstructionsMutation, useGetQuizInstructionQuery } from "../../../../slices/admin/QuizSlice";
 
 type FormValues = {
   description: string;

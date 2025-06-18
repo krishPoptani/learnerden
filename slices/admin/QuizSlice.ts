@@ -43,17 +43,17 @@ interface ApiResponse<T> {
 export const masterApi = createApi({
   reducerPath: "masterApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${hostUrl}/masterService/`,
+    baseUrl: `${hostUrl}/`,
   }),
   tagTypes: ['CourseType'],
   endpoints: (builder) => ({
     // Languages
     getLanguages: builder.query<ApiResponse<Language>, void>({
-      query: () => "language/get",
+      query: () => "masterService/language/get",
     }),
     createLanguage: builder.mutation<Language, Omit<Language, "id">>({
       query: (newLanguage) => ({
-        url: "language/create",
+        url: "masterService/language/create",
         method: "POST",
         body: newLanguage,
       }),
@@ -61,11 +61,11 @@ export const masterApi = createApi({
 
     // Grades
     getGrades: builder.query<ApiResponse<Grade>, void>({
-      query: () => "grade/get",
+      query: () => "masterService/grade/get",
     }),
     createGrade: builder.mutation<Grade, Omit<Grade, "id">>({
       query: (newGrade) => ({
-        url: "grade/create",
+        url: "masterService/grade/create",
         method: "POST",
         body: newGrade,
       }),
@@ -73,11 +73,11 @@ export const masterApi = createApi({
 
     // Subjects
     getSubjects: builder.query<ApiResponse<Subject>, void>({
-      query: () => "subject/get",
+      query: () => "masterService/subject/get",
     }),
     createSubject: builder.mutation<Subject, Omit<Subject, "id">>({
       query: (newSubject) => ({
-        url: "subject/create",
+        url: "masterService/subject/create",
         method: "POST",
         body: newSubject,
       }),
@@ -85,11 +85,11 @@ export const masterApi = createApi({
 
     // Boards
     getBoards: builder.query<ApiResponse<Board>, void>({
-      query: () => "boardtype/get",
+      query: () => "masterService/boardtype/get",
     }),
     createBoard: builder.mutation<Board, Omit<Board, "id">>({
       query: (newBoard) => ({
-        url: "boardtype/create",
+        url: "masterService/boardtype/create",
         method: "POST",
         body: newBoard,
       }),
@@ -97,21 +97,21 @@ export const masterApi = createApi({
 
     // Target Skills
     getTargetSkills: builder.query<ApiResponse<TargetSkill>, void>({
-      query: () => "targetSkills/get",
+      query: () => "masterService/targetSkills/get",
     }),
     createTargetSkill: builder.mutation<TargetSkill, Omit<TargetSkill, "id">>({
       query: (newSkill) => ({
-        url: "targetSkills/create",
+        url: "masterService/targetSkills/create",
         method: "POST",
         body: newSkill,
       }),
     }),
     getQuizById: builder.query<any, string>({
-      query: (quizId) => `quizsurvey/get-quiz?quizId=${quizId}`,
+      query: (quizId) => `masterService/quizsurvey/get-quiz?quizId=${quizId}`,
     }),
     updateQuizSurvey: builder.mutation<any, any>({
       query: (data) => ({
-        url: "quizsurvey/update",
+        url: "masterService/quizsurvey/update",
         method: "PUT",
         body: data,
       }),
@@ -119,42 +119,42 @@ export const masterApi = createApi({
 
     deleteQuizSurvey: builder.mutation<any, any>({
       query: (data) => ({
-        url: "quizsurvey/delete",
+        url: "masterService/quizsurvey/delete",
         method: "DELETE",
         body: data,
       }),
     }),
     createQuizSurvey: builder.mutation<any, any>({
       query: (data) => ({
-        url: "quizsurvey/create",
+        url: "masterService/quizsurvey/create",
         method: "POST",
         body: data,
       }),
     }),
     getOneQuiz: builder.query<any, any>({
       query: ({ id, offset, limit }) =>
-        `quiz-details/get-one-quiz?id=${id}&offset=${offset}&limit=${limit}`,
+        `masterService/quiz-details/get-one-quiz?id=${id}&offset=${offset}&limit=${limit}`,
     }),
     createQuizInstructions: builder.mutation<any, any>({
       query: (data) => ({
-        url: "quiz-instructions/create",
+        url: "masterService/quiz-instructions/create",
         method: "POST",
         body: data,
       }),
     }),
     getQuizInstruction: builder.query<any, any>({
-      query: ({ quizId }) => `/quiz-instructions/get?quizId=${quizId}`,
+      query: ({ quizId }) => `masterService//quiz-instructions/get?quizId=${quizId}`,
     }),
     getQuizDetails: builder.query({
       query: ({ offset, limit, id }) => ({
-        url: `quiz-details/get?offset=${offset}&limit=${limit}`,
+        url: `masterService/quiz-details/get?offset=${offset}&limit=${limit}`,
         method: "GET",
       }),
       providesTags: (result) => [{ type: 'CourseType', id: 'LIST' }],
     }),
     createQuiz: builder.mutation<any, any>({
       query: (data) => ({
-        url: "quiz-details/create",
+        url: "masterService/quiz-details/create",
         method: "POST",
         body: data,
       }),
@@ -162,9 +162,22 @@ export const masterApi = createApi({
     }),
     createQuizQuestions: builder.mutation<any, any>({
       query: (data) => ({
-        url: "quizsurvey/createbulk",
+        url: "masterService/quizsurvey/createbulk",
         method: "POST",
         body: data,
+      }),
+    }),
+    deleteQuizDetails: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `masterService/quiz-details/delete/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ['CourseType'],
+    }),
+    quizPublish: builder.mutation<any, any>({
+      query: (id) => ({
+        url: `masterService/quiz-details/active-status-update/${id}`,
+        method: "PUT",
       }),
     }),
   }),
@@ -174,16 +187,12 @@ export const masterApi = createApi({
 export const {
   useGetLanguagesQuery,
   useCreateLanguageMutation,
-
   useGetGradesQuery,
   useCreateGradeMutation,
-
   useGetSubjectsQuery,
   useCreateSubjectMutation,
-
   useGetBoardsQuery,
   useCreateBoardMutation,
-
   useGetTargetSkillsQuery,
   useCreateTargetSkillMutation,
   useGetQuizByIdQuery,
@@ -195,5 +204,7 @@ export const {
   useCreateQuizInstructionsMutation,
   useCreateQuizMutation,
   useCreateQuizQuestionsMutation,
-  useGetQuizDetailsQuery
+  useGetQuizDetailsQuery,
+  useDeleteQuizDetailsMutation,
+  useQuizPublishMutation
 } = masterApi;

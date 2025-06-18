@@ -4,6 +4,9 @@ import UserDashboard from '@/routes/userside/page';
 import { useParams, useRouter } from 'next/navigation';
 import { useGetQuizInstructionQuery, usePostQuizStartMutation } from '../../../../../../slices/user/quizSliceUser';
 import { getUserInfo } from '@/utils/user.util';
+import { showAlertPopupError } from '@/component/AlertPopup/Alert';
+import { useState } from 'react';
+import PopupMessage from '@/component/PopupMessage';
 
 export default function MockTestPage() {
   const params = useParams();
@@ -21,6 +24,8 @@ export default function MockTestPage() {
 
   const [postQuizStart] = usePostQuizStartMutation()
   const user = getUserInfo()
+  const [showPopup, setShowPopup] = useState(false)
+  const [popupMessage,setPopupMessage]=useState('')
   const handleTakeTestClick = async () => {
     try {
       const payload = {
@@ -34,9 +39,12 @@ export default function MockTestPage() {
       if (attemptId) {
         router.push(`/quiz/${grade}/${subject}/mock/${attemptId}`);
       } else {
-        console.error("Attempt ID not found in response.");
+        const errorMessage = (res as any)?.error?.data?.error || 'Please try again';
+        setPopupMessage(errorMessage)
+        setShowPopup(true)
       }
     } catch (error) {
+      alert('rr')
       console.error("Failed to start quiz attempt:", error);
     }
   };
@@ -123,7 +131,17 @@ export default function MockTestPage() {
 
           </div>
         </div>
-
+        <PopupMessage
+          show={showPopup}
+          onClose={() => {
+            setShowPopup(false);
+          }}
+          title="Login failed!"
+          message={popupMessage}
+          buttonText="Login"
+          onButtonClick={()=>setShowPopup(false)}
+          imageUrl="/icons/login_failed.svg"
+        />
       </div>
     </UserDashboard>
   );

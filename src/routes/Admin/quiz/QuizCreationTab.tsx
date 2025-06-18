@@ -10,10 +10,12 @@ import QuestionEditor from "./QuestionEditor";
 import {
   useGetOneQuizQuery,
   useGetQuizByIdQuery,
-} from "../../../../slices/QuizSlice";
+  useQuizPublishMutation,
+} from "../../../../slices/admin/QuizSlice";
 import SetInstruction from "./SetInstruction";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
+import PopupMessage from "@/component/PopupMessage";
 
 const backBtn = `/icons/backbtn.svg`;
 
@@ -39,7 +41,14 @@ export default function QuizCreationTab() {
   const [modal, setModal] = useState<Boolean>(false);
   const [selectedQuestion, setSelectedQuestion] = useState<any>(null);
   const [instructionsModal, setInstructionsModal] = useState<any>(null);
-
+  const [quizPublish] = useQuizPublishMutation()
+  const [popupMessage, setPopupMessage] = useState<string>('')
+  const [showPopup, setShowPopup] = useState<boolean>(false)
+  const publishQuiz = async () => {
+    let res = await quizPublish(quizId)
+    setPopupMessage(res?.data?.result)
+    setShowPopup(true)
+  }
   return (
     <div className="bg-white flex flex-col h-screen z-[9999]">
       {/* Sticky Header */}
@@ -68,6 +77,12 @@ export default function QuizCreationTab() {
             }}
           >
             Set Instructions
+          </button>
+          <button
+            className="border-none cursor-pointer min-w-[160px] text-white bg-[#4F4AB0] rounded-full py-2"
+            onClick={() => publishQuiz()}
+          >
+            Publish
           </button>
           {/* <button className="border-none cursor-pointer min-w-[160px] text-white bg-[#981C51] rounded-full py-2">
             Quiz Verification
@@ -100,12 +115,13 @@ export default function QuizCreationTab() {
       {modal && (
         <Modal
           header="Edit Question"
-          width="720px"
+          // width=""
           onClose={() => setModal(false)}
         >
           <QuestionEditor
             selectedQuestion={selectedQuestion}
             refetch={refetch}
+            setModal={setModal}
           />
         </Modal>
       )}
@@ -119,6 +135,19 @@ export default function QuizCreationTab() {
           <SetInstruction quizId={quizId} />
         </Modal>
       )}
+      {
+        <PopupMessage
+          show={showPopup}
+          onClose={() => {
+            setShowPopup(false);
+          }}
+          title="Publish"
+          message={popupMessage}
+          buttonText="Done"
+          onButtonClick={() => setShowPopup(false)}
+          imageUrl="/icons/login_failed.svg"
+        />
+      }
     </div>
   );
 }

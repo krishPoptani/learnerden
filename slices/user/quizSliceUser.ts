@@ -72,6 +72,12 @@ export const QuizUserApi = createApi({
                 method: "GET",
             }),
         }),
+        getGradeQuizDetails: builder.query({
+            query: () => ({
+                url: `masterService/grade/get-grade-QuizDetails`,
+                method: "GET",
+            }),
+        }),
     }),
 });
 export const {
@@ -82,4 +88,5 @@ export const {
     usePostQuizStartMutation,
     usePostQuizEndMutation,
     useGetOneUserViewQuizDetailsQuery,
+    useGetGradeQuizDetailsQuery
 } = QuizUserApi;

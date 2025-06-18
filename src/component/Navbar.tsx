@@ -141,8 +141,8 @@ export default function Navbar() {
                 >
                   <img className="w-[50px] h-[50px]" src={profileIcon} alt="profileIcon" />
                   <div>
-                    <span className="text-[#2E2E48] font-semibold">Ali Raza</span>
-                    <p className="text-sm font-normal text-[#808080]">Student</p>
+                    <span className="text-[#2E2E48] font-semibold">{user?.name}</span>
+                    <p className="text-sm font-normal text-[#808080] capitalize">{user?.role?.name}</p>
                   </div>
                   <div>
                     <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">

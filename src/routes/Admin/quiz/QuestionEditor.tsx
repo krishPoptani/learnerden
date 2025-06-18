@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useForm, Controller, useWatch } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { useCreateQuizSurveyMutation, useUpdateQuizSurveyMutation } from "../../../../slices/QuizSlice";
+import { useCreateQuizSurveyMutation, useUpdateQuizSurveyMutation } from "../../../../slices/admin/QuizSlice";
+import PageLoader from "@/component/pageLoader";
 
 const closeIcon = `/icons/BlackCloseBtn.png`;
 
@@ -15,13 +16,14 @@ type FormValues = {
 };
 
 type QuestionEditorProps = {
-  refetch : any,
+  refetch: any,
   selectedQuestion: any
+  setModal: any
 };
 
-const QuestionEditor: React.FC<QuestionEditorProps> = ({ selectedQuestion,refetch }) => {
+const QuestionEditor: React.FC<QuestionEditorProps> = ({ selectedQuestion, refetch, setModal }) => {
   const [createQuizSurvey] = useCreateQuizSurveyMutation();
-const [updateQuizSurvey] = useUpdateQuizSurveyMutation();;
+  const [updateQuizSurvey,{isLoading:updateQuizSurveyLoading}] = useUpdateQuizSurveyMutation();;
   const {
     control,
     register,
@@ -34,12 +36,17 @@ const [updateQuizSurvey] = useUpdateQuizSurveyMutation();;
       question: selectedQuestion?.question || "",
       selectedAnswer: selectedQuestion?.correctAnswer || "",
       answers: selectedQuestion?.answer?.length
-      ? selectedQuestion.answer
-      : ["", ""], // Ensure 2 empty options
+        ? selectedQuestion.answer
+        : ["", ""], // Ensure 2 empty options
     },
   });
 
   const answers = useWatch({ control, name: "answers" });
+  console.log(answers,"answers");
+  
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (selectedQuestion) {
@@ -73,94 +80,208 @@ const [updateQuizSurvey] = useUpdateQuizSurveyMutation();;
   };
 
   const { getValues } = useForm();
+  console.log(imageFile, "imageUrl");
 
   const onSubmit = async (data: FormValues) => {
     if (!data.answers.includes(data.selectedAnswer)) {
       alert("Correct answer must be one of the options.");
       return;
     }
-  
+
     const formatted = {
-      quizId: selectedQuestion.quizId || "default-quiz-id",
+      quizId: selectedQuestion.quizId,
       question: data.question,
       answer: data.answers,
       correctAnswer: data.selectedAnswer,
       number: parseInt(selectedQuestion.number) || 1,
+      image: imageFile, // ideally this should be a File, not just a URL
     };
-  
+
+    // Convert to FormData
+    const formData = new FormData();
+    formData.append("quizId", formatted.quizId);
+    formData.append("question", formatted.question);
+    formData.append("correctAnswer", formatted.correctAnswer);
+    formData.append("number", String(formatted.number));
+
+    // Append each answer separately
+    formatted.answer.forEach((ans: string, index: number) => {
+      formData.append(`answer[${index}]`, ans);
+    });
+    if (formatted.image) {
+      formData.append("image", formatted.image); // ✅ This sends binary data
+    }
+
+
     try {
       if (selectedQuestion.id) {
-        await updateQuizSurvey({ id: selectedQuestion.id, ...formatted }).unwrap();
+        formData.append("id", selectedQuestion.id); // if your API expects ID in FormData
+        await updateQuizSurvey(formData).unwrap();
         console.log("Updated successfully");
       } else {
-        await createQuizSurvey(formatted).unwrap();
+        await createQuizSurvey(formData).unwrap();
         console.log("Created successfully");
       }
-  
+
       refetch();
+      setModal(false);
     } catch (error) {
       console.error("Submission failed:", error);
     }
+
   };
-  
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImageFile(file); // ✅ This is the binary file
+      setImageUrl(URL.createObjectURL(file)); // ✅ This is only for preview
+    }
+  };
+
+
+  const handleEditClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleDelete = () => {
+    setImageUrl(null);
+    setImageFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      {/* Question Field */}
-      <div>
-        <label className="block font-medium mb-2 text-sm text-gray-700">Question</label>
-        <textarea
-          rows={3}
-          {...register("question", { required: true })}
-          className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#4F4AB0] resize-none"
-        />
-        {errors.question && <p className="text-red-500 text-sm">Question is required</p>}
-      </div>
+    <div>
+      {updateQuizSurveyLoading&&<PageLoader/>}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <div className="flex gap-10 flex-wrap mb-5">
+            <div>
+              <label className="block font-medium mb-2 text-sm text-gray-700">Question</label>
+              <textarea
+                rows={6}
+                {...register("question", { required: true })}
+                className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#4F4AB0] resize-none w-[400px]"
+              />
+              {errors.question && <p className="text-red-500 text-sm">Question is required</p>}
+            </div>
 
-      {/* Answer Options */}
-      <div className="space-y-3">
-        {answers.map((ans, index) => (
-          <div key={index} className="flex items-center gap-3 border border-[#D9D9D9] p-2 rounded-md">
-            <Controller
-              control={control}
-              name="selectedAnswer"
-              render={({ field }) => (
+            <div>
+              <label className="block font-medium mb-2 text-sm text-gray-700">
+                Upload Image
+              </label>
+
+              <div className="relative w-[230px] h-[160px] border border-dashed border-gray-300 rounded flex items-center justify-center bg-white">
+                {!imageUrl ? (
+                  <div
+                    onClick={handleEditClick}
+                    className="text-blue-600 text-sm text-center cursor-pointer"
+                  >
+                    <div className="flex flex-col items-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-6 h-6 mb-1 text-gray-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 16v1a2 2 0 002 2h14a2 2 0 002-2v-1M12 12v6m0 0l-3-3m3 3l3-3m0-6a4 4 0 11-8 0 4 4 0 018 0z"
+                        />
+                      </svg>
+                      + Add Question Image
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <img
+                      src={imageUrl}
+                      alt="Uploaded"
+                      className="object-contain w-full h-full rounded"
+                    />
+                    <button
+                      onClick={handleEditClick}
+                      className="absolute top-1 right-9 text-blue-600 bg-white rounded-full p-1 shadow"
+                      title="Edit"
+                      type="button"
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      onClick={handleDelete}
+                      className="absolute top-1 right-1 text-red-600 bg-white rounded-full p-1 shadow"
+                      title="Delete"
+                      type="button"
+                    >
+                      🗑️
+                    </button>
+                  </>
+                )}
+
                 <input
-                  type="radio"
-                  className="h-5 w-5"
-                  value={ans}
-                  checked={field.value === ans}
-                  onChange={() => field.onChange(ans)}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  ref={fileInputRef}
+                  className="hidden"
                 />
-              )}
-            />
-            <input
-              value={ans}
-              onChange={(e) => updateAnswer(index, e.target.value)}
-              placeholder={`Enter option ${index + 1}`}
-              className="flex-1 outline-none"
-            />
-            <button
-              type="button"
-              onClick={() => removeAnswer(index)}
-              className="text-red-500"
-            >
-              <Image src={closeIcon} width={16} height={16} alt="Remove" />
-            </button>
+              </div>
+              {errors.question && <p className="text-red-500 text-sm">Question is required</p>}
+            </div>
           </div>
-        ))}
-      </div>
 
-      {/* Save Button */}
-      <div className="text-center pt-4">
-        <Button
-          type="submit"
-          className="bg-[#4F4AB0] hover:bg-[#4F4AB0] text-white px-20 py-2 rounded-md"
-        >
-          Save
-        </Button>
-      </div>
-    </form>
+          {/* Answer Options */}
+          <div className="space-y-3">
+            {answers.map((ans, index) => (
+              <div key={index} className="flex items-center gap-3 border border-[#D9D9D9] p-2 rounded-md">
+                <Controller
+                  control={control}
+                  name="selectedAnswer"
+                  render={({ field }) => (
+                    <input
+                      type="radio"
+                      className="h-5 w-5"
+                      value={ans}
+                      checked={field.value === ans}
+                      onChange={() => field.onChange(ans)}
+                    />
+                  )}
+                />
+                <input
+                  value={ans}
+                  onChange={(e) => updateAnswer(index, e.target.value)}
+                  placeholder={`Enter option ${index + 1}`}
+                  className="flex-1 outline-none"
+                />
+                <button
+                  type="button"
+                  onClick={() => removeAnswer(index)}
+                  className="text-red-500"
+                >
+                  <Image src={closeIcon} width={16} height={16} alt="Remove" />
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Save Button */}
+          <div className="text-center pt-4">
+            <Button
+              type="submit"
+              className="bg-[#4F4AB0] hover:bg-[#4F4AB0] text-white px-20 py-2 rounded-md"
+            >
+              Save
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 
